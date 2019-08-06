@@ -1,0 +1,26 @@
+label: Image
+icon: material:photo
+preview: >
+  {{ image }}
+fields:
+  image:
+    type: image
+---
+<div{{ editAttributes }}>
+  <h4>Member #{{ loop.index }}</h4>
+
+  {% if info is defined %}
+    <div class="alert alert-secondary" role="alert">
+      Passed info: <strong>{{ info }}</strong>
+    </div>
+  {% endif %}
+
+  <figure class="figure">
+    {{ image.imageTag({
+      type: 'default',
+      attributes: {
+        class: 'figure-img img-fluid rounded'
+      }
+    }) }}
+  </figure>
+</div>

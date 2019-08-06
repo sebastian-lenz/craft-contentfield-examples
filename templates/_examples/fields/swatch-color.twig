@@ -1,0 +1,102 @@
+label: "Field: Swatch color"
+rootSchema: true
+
+# Prints the label of the selected option when previewed.
+preview: >
+  {{ simpleSwatchColor }}
+
+fields:
+  # A swatch color field allows users to pick one of several
+  # predefined colors. The API is identical to select fields,
+  # the only difference is that option labels must contain a
+  # css color.
+  simpleSwatchColor:
+    type: swatchColor
+    options:
+      red: "#D63545"
+      green: "#28a745"
+      blue: "#007bff"
+
+  # A default option can be set using the attribute `defaultValue`.
+  defaultValueSwatchColor:
+    type: swatchColor
+    defaultValue: red
+    options:
+      red: "#D63545"
+      green: "#28a745"
+      blue: "#007bff"
+
+  # Options can define additional properties that can be accessed
+  # within the template
+  customDataSwatchColor:
+    type: swatchColor
+    options:
+      red:
+        label: "#D63545"
+        alertClass: alert-danger
+      green:
+        label: "#28a745"
+        alertClass: alert-success
+      blue:
+        label: "#007bff"
+        alertClass: alert-primary
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Swatch color field</h1>
+  <p>Swatch color fields expose an instance of
+    <code><a href="https://github.com/sebastian-lenz/craft-contentfield/blob/master/src/models/values/EnumerationValue.php">EnumerationValue</a></code>
+    to templates.</p>
+
+  <h2>Rendering</h2>
+  <p>Rendering a swatch color field will return the key of the selected color.</p>
+  {% example %}
+    <pre>{{ simpleSwatchColor }}</pre>
+  {% endexample %}
+
+
+  <h2>Methods</h2>
+
+  <h3>contains</h3>
+  <p>Checks whether the swatch color field contains the given value.</p>
+  {% example %}
+    {%- if simpleSwatchColor.contains('blue') -%}
+      <div class="alert alert-success" role="alert">Select contains "blue"</div>
+    {%- else -%}
+      <div class="alert alert-danger" role="alert">Select does not contain "blue"</div>
+    {%- endif -%}
+  {% endexample %}
+
+
+  <h3>getCustomData / customData</h3>
+  <p>Returns custom data set on the currently selected color.</p>
+  {% example %}
+    <pre>alertClass: {{ customDataSwatchColor.customData('alertClass') }}</pre>
+  {% endexample %}
+
+  <p>The enumeration value also contains magic methods that retrieve
+    custom data directly.</p>
+  {% example %}
+    <div class="alert {{ customDataSwatchColor.alertClass }}" role="alert">Quisque malesuada placerat nisl.</div>
+  {% endexample %}
+
+  <h3>getValue / value</h3>
+  <p>Retrieves the selected value as a plain PHP value (string or number). Useful
+    if you must pass the selected option to a function or query.</p>
+  {% example %}
+    <pre>{{ simpleSwatchColor.value }}</pre>
+  {% endexample %}
+
+
+  <h3>isEmpty / hasValue</h3>
+  <p>The methods <code>isEmpty</code> and <code>hasValue</code> can be used
+    to check whether a swatch color field is set to a value.</p>
+  {% example %}
+    {%- if simpleSwatchColor.hasValue -%}
+      <div class="alert alert-success" role="alert">Select has a value.</div>
+    {%- else -%}
+      <div class="alert alert-danger" role="alert">Select has no value.</div>
+    {%- endif -%}
+  {% endexample %}
+{% endblock %}

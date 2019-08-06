@@ -1,0 +1,63 @@
+label: "Field: Textarea"
+rootSchema: true
+
+# You can print the value of a textarea field in the preview
+preview: >
+  {{ textareaField }}
+
+fields:
+  # A text field allows users to enter a multiline string.
+  textareaField:
+    type: textarea
+
+  # A placeholder for empty textareas can be set.
+  placeholderField:
+    type: textarea
+    placeholder: Your message here
+
+  # The height can be set using the attribute `rows`. The
+  # default height is 5.
+  rowsField:
+    type: textarea
+    rows: 2
+
+  # We do not support setting the number of columns, adjust the
+  # width of the field instead.
+  colsField:
+    type: textarea
+    width: 200px
+
+  # Set `monospace` to true to display the textarea with a
+  # monospace font in the control panel.
+  codeField:
+    type: textarea
+    monospace: true
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Textarea field</h1>
+  <p>Textarea fields expose a <code>string</code> value to templates.</p>
+
+  <h2>Rendering</h2>
+  <p>Text fields expose a string and can be rendered directly:</p>
+
+  {% example %}
+    <pre>{{ textareaField }}</pre>
+  {% endexample %}
+
+
+  <p>Use the <code>nl2br</code> twig filter to render line breaks
+    correctly.</p>
+  {% example %}
+    <p>{{ textareaField|nl2br }}</p>
+  {% endexample %}
+
+
+  <p>When using HTML in a textarea, remember to apply the raw
+    filter in your template.</p>
+
+  {% example %}
+    {{ codeField|raw }}
+  {% endexample %}
+{% endblock %}

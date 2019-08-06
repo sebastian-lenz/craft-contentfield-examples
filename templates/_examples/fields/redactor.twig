@@ -1,0 +1,121 @@
+label: "Field: Redactor"
+rootSchema: true
+
+# Returns the html code when previewed.
+preview: >
+  {{ simpleRedactor }}
+
+fields:
+  # A redactor field allows users to enter rich text. The field
+  # uses the same redactor version as the control panel.
+  simpleRedactor:
+    type: redactor
+
+  # You can specify the redactor config file to use using the
+  # `redactorConfig` attribute.
+  configRedactor:
+    type: redactor
+    redactorConfig: Simple.json
+
+  # You can modify the purifier configuration using the `purifierConfig`
+  # attribute.
+  purifierRedactor:
+    type: redactor
+    redactorConfig: PagedRedactor.json
+    purifierConfig: PagedPurifier.json
+
+  # By default redactor field values will be indexed for full text
+  # searches. You can disable this by setting `searchable` to false.
+  nonSearchableRedactor:
+    type: redactor
+    searchable: false
+
+  # By default redactor fields are passed to the translation service.
+  # You can disable this by setting `translatable` to false.
+  nonTranslatableRedactor:
+    type: redactor
+    translatable: false
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Redactor field</h1>
+  <p>Redactor fields expose an instance of
+    <code><a href="https://github.com/sebastian-lenz/craft-contentfield/blob/master/src/models/values/RedactorValue.php">RedactorValue</a></code>
+    to templates.</p>
+
+
+  <h2>Rendering</h2>
+
+  <p>The returned value is a subclass of <code>Markup</code> and can be
+    rendered directly.</p>
+  {% example %}
+    {{ simpleRedactor }}
+  {% endexample %}
+
+
+  <h3>{{ '{% display %}' }}</h3>
+  <p>Redactor fields can be displayed using the <code>display</code> tag.</p>
+  {% example %}
+    {% display simpleRedactor %}
+  {% endexample %}
+
+
+  <h2>Methods</h2>
+
+  <h2>count</h2>
+  <p>Returns the number of characters. Can also be accessed using the
+    Twig <code>length</code> filter.</p>
+  {% example %}
+    <pre>Length: {{ purifierRedactor|length }}</pre>
+  {% endexample %}
+
+
+  <h2>getHtml / html</h2>
+  <p>Returns a twig <code>Markup</code> instance containing the field contents.</p>
+  {% example %}
+    {% set content = simpleRedactor.html() %}
+    {{ content }}
+  {% endexample %}
+
+
+  <h2>getPage / page</h2>
+  <p>Return the page with specified index defined by the <code>pagebreak</code>
+    plugin. The first page has the index 1.</p>
+  {% example %}
+    {% if purifierRedactor.totalPages > 2 %}
+      {{ purifierRedactor.page(2) }}
+    {% endif %}
+  {% endexample %}
+
+
+  <h2>getPages / pages</h2>
+  <p>Splits the content of the field by the page breaks defined by the
+    <code>pagebreak</code> plugin and returns an array of all pages.</p>
+  {% example %}
+    <ul>
+      {% for page in purifierRedactor.pages %}
+        <li>{{ page }}</li>
+      {% endfor %}
+    </ul>
+  {% endexample %}
+
+  <h2>getTotalPages / totalPages</h2>
+  <p>Returns the number of pages defined by the <code>pagebreak</code> plugin
+    within the field.</p>
+  {% example %}
+    <pre>Number of pages: {{ purifierRedactor.totalPages }}</pre>
+  {% endexample %}
+
+
+  <h2>hasValue / isEmpty</h2>
+  <p>The methods <code>hasValue</code> and <code>isEmpty</code> can be used
+    to check whether the field contains a value.</p>
+  {% example %}
+    {%- if simpleRedactor.hasValue -%}
+      <div class="alert alert-success" role="alert">Redactor has a value.</div>
+    {%- else -%}
+      <div class="alert alert-danger" role="alert">Redactor has no value.</div>
+    {%- endif -%}
+  {% endexample %}
+{% endblock %}

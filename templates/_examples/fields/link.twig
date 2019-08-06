@@ -1,0 +1,141 @@
+label: "Field: Link"
+rootSchema: true
+
+fields:
+  # A link field allows users to enter a link. By default it allows linking
+  # to an asset, e-mail, entry or url.
+  simpleLink:
+    type: link
+
+  # You can fully customize the available link types. Two types of link types
+  # are available, `element` and `input` link types.
+  # The following field shows how to create input link types.
+  inputLink:
+    type: link
+    linkTypes:
+      url:
+        type: input
+        label: Url
+        inputType: url
+      mail:
+        type: input
+        label: E-Mail
+        inputType: email
+
+  # The following field shows how to create element link types.
+  elementLink:
+    type: link
+    linkTypes:
+      entry:
+        type: element
+        label: Entry
+        elementType: craft\elements\Entry
+      asset:
+        type: element
+        label: Asset
+        elementType: craft\elements\Asset
+
+  # By default the field shows an option to open links in a new window.
+  # This option can be hidden by setting `allowNewWindow` to false.
+  noNewWindow:
+    type: link
+    allowNewWindow: false
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Link field</h1>
+  <p>Link fields expose an instance of
+    <code><a href="https://github.com/sebastian-lenz/craft-contentfield/blob/master/src/models/values/LinkValue.php">LinkValue</a></code>
+    to templates.</p>
+
+
+  <h2>Rendering</h2>
+  <p>A link field renders the linked url ready to be used within a
+    <code>href</code> attribute.</p>
+  {% example %}
+    <p>
+      <a class="btn btn-primary" href="{{ simpleLink }}">Open link</a>
+    </p>
+  {% endexample %}
+
+
+  <h2>Attributes</h2>
+
+  <h3>openInNewWindow</h3>
+  <p>The attribute <code>openInNewWindow</code> stores whether the link should
+    open in a new window or not.</p>
+
+  {% example %}
+    {%- if simpleLink.openInNewWindow -%}
+      <div class="alert alert-success" role="alert">Link should open in new window.</div>
+    {%- else -%}
+      <div class="alert alert-danger" role="alert">Link should open in same window.</div>
+    {%- endif -%}
+  {% endexample %}
+
+
+  <h2>Methods</h2>
+
+  <h3>getLinkAttributes / linkAttributes</h3>
+  <p>The <code>getLinkAttributes</code> method returns the attributes
+    <code>href</code> and <code>target</code> defined by the link. Additional
+    attributes can be passed as an object to the first argument.</p>
+  {% example %}
+    <p><a{{ simpleLink.linkAttributes({
+      class: 'btn btn-primary'
+    }) }}>Open link</a></p>
+  {% endexample %}
+
+
+  <h3>getLinkedElement / linkedElement</h3>
+  <p>The <code>getLinkedElement</code> method returns the element a link is pointing
+    to or <code>null</code> if no element is selected. Use <code>hasLinkedElement</code>
+    to check whether the link has an element or not.</p>
+
+  {% example %}
+    {%- if simpleLink.hasLinkedElement -%}
+      <p>Links to: <strong>{{ simpleLink.linkedElement.title }}</strong></p>
+    {%- else -%}
+      <p>No element link</p>
+    {%- endif -%}
+  {% endexample %}
+
+
+  <h3>getType / type</h3>
+  <p>The method <code>getType</code> retrieves the selected link type.</p>
+  {% example %}
+    <pre>{{ simpleLink.type }}</pre>
+  {% endexample %}
+
+
+  <h3>getUrl / url</h3>
+  <p>The <code>url</code> method returns the linked url.</p>
+  {% example %}
+    <pre>{{ simpleLink.url }}</pre>
+  {% endexample %}
+
+
+  <h3>hasLinkedElement</h3>
+  <p>The method <code>hasLinkedElement</code> checks whether the link points
+    to another element (and is set to one).</p>
+  {% example %}
+    {%- if simpleLink.hasLinkedElement -%}
+      <div class="alert alert-success" role="alert">Link points to another element.</div>
+    {%- else -%}
+      <div class="alert alert-danger" role="alert">Link does not point to another element.</div>
+    {%- endif -%}
+  {% endexample %}
+
+
+  <h3>hasValue / isEmpty</h3>
+  <p>The functions <code>isEmpty</code> and <code>hasValue</code> can be used
+    to check whether a link contains a value.</p>
+  {% example %}
+    {%- if simpleLink.hasValue -%}
+      <div class="alert alert-success" role="alert">Link has a value.</div>
+    {%- else -%}
+      <div class="alert alert-danger" role="alert">Link has no value.</div>
+    {%- endif -%}
+  {% endexample %}
+{% endblock %}

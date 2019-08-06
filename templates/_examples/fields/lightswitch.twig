@@ -1,0 +1,33 @@
+label: "Field: Lightswitch"
+rootSchema: true
+
+fields:
+  # A checkbox field allows users to enable or disable
+  # an option.
+  simpleLightswitch:
+    type: lightswitch
+
+  # You can set check checkboxes by default using the
+  # `defaultValue` attribute
+  defaultValueLightswitch:
+    type: lightswitch
+    defaultValue: true
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Lightswitch field</h1>
+  <p>Lightswitch fields expose a <code>boolean</code> value to templates.</p>
+
+  <h2>Rendering</h2>
+  <p>Lightswitches expose a boolean value to templates. Use
+    them inside conditions.</p>
+
+  {% example %}
+    {% if simpleLightswitch %}
+      <div class="alert alert-success" role="alert">Option is <strong>enabled</strong></div>
+    {% else %}
+      <div class="alert alert-danger" role="alert">Option is <strong>disabled</strong></div>
+    {% endif %}
+  {% endexample %}
+{% endblock %}

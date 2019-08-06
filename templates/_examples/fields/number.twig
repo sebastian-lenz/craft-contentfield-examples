@@ -1,0 +1,79 @@
+label: "Field: Number"
+rootSchema: true
+
+# You can print the value of a number field in the preview
+preview: >
+  {{ numberField }}
+
+fields:
+  # A number field allows users to enter a number. By default
+  # it accepts floating values.
+  numberField:
+    type: number
+
+  # You may set the `dataType` to only allow integer values.
+  # The `dataType` my be `double` or `integer`.
+  integerField:
+    type: number
+    dataType: integer
+
+  # You can specify a default value.
+  defaultValueField:
+    type: number
+    defaultValue: 100
+
+  # You can specify a maximum and minimum value.
+  minMaxField:
+    type: number
+    min: 10
+    max: 100
+
+  # You can mark a number field as optional. Optional number fields
+  # are set to `null` when left empty in the control panel.
+  # Additionally you may provide a placeholder that will be
+  # displayed if the field is empty.
+  optionalNumber:
+    type: number
+    optional: true
+    placeholder: Defaults to 100
+
+  # You can display a unit next to the field.
+  unitField:
+    type: number
+    unit: Pixel
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Number field</h1>
+  <p>Number fields expose a <code>float</code> or <code>integer</code> value to templates.</p>
+
+  <h2>Rendering</h2>
+  <p>The number field exposes a numeric variable to your template. You
+    can print the value of the field:</p>
+
+  {% example %}
+    <pre>{{ numberField }}</pre>
+  {% endexample %}
+
+
+  <p>It is a real scalar value so you can apply mathematical functions
+    to the value:</p>
+
+  {% example %}
+    <pre>{{ numberField + 10 }}</pre>
+  {% endexample %}
+
+
+  <h3>Check for <code>null</code></h3>
+  <p>Keep in mind to check whether the value is <code>null</code> on optional
+    fields to detect whether the user has entered <code>0</code>.</p>
+
+  {% example %}
+    {% if optionalNumber is null %}
+      <div class="alert alert-danger" role="alert">Field optionalNumber has no value</div>
+    {% else %}
+      <div class="alert alert-success" role="alert">Field optionalNumber has a value: {{ optionalNumber }}</div>
+    {% endif %}
+  {% endexample %}
+{% endblock %}

@@ -1,0 +1,173 @@
+label: "Field: Array"
+rootSchema: true
+
+# Array fields support multiple preview methods:
+# - You can iterate an array field using the `#each` helper.
+# - `asColumn`: Renders each item in a vertical stack
+# - `asList`: Renders each item in a html list
+# - `asRow`: Renders each item in a horizontal stack
+preview: >
+  <ul>
+    {{#each arrayField}}
+      <li>{{ this }}</li>
+    {{/each}}
+  </ul>
+  {{ arrayField.asColumn }}
+  {{ arrayField.asList }}
+  {{ arrayField.asRow }}
+
+fields:
+  # An array field allows users to enter multiple values of
+  # a certain field. The attribute `member` must be specified,
+  # it is a field definition.
+  # This field stores an array of text fields.
+  simpleArray:
+    type: array
+    member:
+      type: text
+
+  # A maximum number of items can be specified using the
+  # `limit` attribute.
+  limitedArray:
+    type: array
+    limit: 2
+    member:
+      type: text
+
+  # Using an instance field as the member of an array allows
+  # templates to be nested.
+  instanceArray:
+    type: array
+    member:
+      type: instance
+      schemas: _examples/fields/blocks/*
+
+  # As this type of array is so common, there is a shortcut to
+  # define it, simply use the type `instances`.
+  instanceArrayAlias:
+    type: instances
+    schemas: _examples/fields/blocks/*
+
+  # You can control whether instances show a preview or not using
+  # the `previewMode` attribute. It accepts the following values:
+  # - `always`: Always shows the extended preview as defined by the
+  #   `preview` instance property.
+  # - `never`: Never shows a preview, always uses `previewLabel`.
+  # - `root`: Only show the extended preview if the array is at the
+  #   first display level.
+  previewModeArray:
+    type: instances
+    schemas: _examples/fields/blocks/*
+    previewMode: never
+
+  # By default each member in an instance array is collapsed and
+  # must be expanded to be edited. Set `collapsible` to `false` in
+  # order to deactivate this behaviour.
+  alwaysExpandedArray:
+    type: instances
+    schemas: _examples/fields/blocks/*
+    collapsible: false
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Array field</h1>
+  <p>Array fields expose an instance of
+    <code><a href="https://github.com/sebastian-lenz/craft-contentfield/blob/master/src/models/values/ArrayValue.php">ArrayValue</a></code>
+    to templates.</p>
+
+
+  <h2>Rendering</h2>
+
+  <h3>Iterating</h3>
+  <p>An array field can be iterated over using a twig <code>for</code> loop:</p>
+  {% example %}
+    <ul>
+      {% for item in simpleArray %}
+        <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+  {% endexample %}
+
+
+  <h3>Array access</h3>
+  <p>Arrays support the array access syntax to retrieve individual items.
+    Remember to check for existence when using this syntax.</p>
+  {% example %}
+    {%- if simpleArray|length > 0 -%}
+      <p>{{ simpleArray[0] }}</p>
+    {%- endif -%}
+  {% endexample %}
+
+
+  <h3>{{ '{% display %}' }}</h3>
+  <p>Use the <code>display</code> helper to render the items in an
+    instance array. If you need the rendered output as a variable, please use
+    the <code>html</code> method.</p>
+  {% example %}
+    {% display instanceArray %}
+  {% endexample %}
+
+
+  <h3>{{ '{% display with %}' }}</h3>
+  <p>The display helper can also pass additional variables to the
+    individual instances. To do this, use the <code>with</code>
+    keyword.</p>
+  {% example %}
+    {% display instanceArray with {
+      info: 'I am a shared variable.'
+    } %}
+  {% endexample %}
+
+
+  <h3>{{ '{% display inline %}' }}</h3>
+  <p>Use the <code>inline</code> keyword on the <code>display</code> helper
+    to copy the child templates to the calling template. This can speed up
+    the rendering times but will increase the compile time. Please measure
+    the benefits of this argument and decide for each use case whether this
+    makes sense.</p>
+  <p>You cannot inline children extending another template or using blocks.
+    When inlining templates make sure your macros have unique names (they
+    will be merged by name) or place macros in an external file and import
+    them.</p>
+  {% example %}
+    {% display inline instanceArray %}
+  {% endexample %}
+
+
+  <h2>Methods</h2>
+
+  <h3>count</h3>
+  <p>Returns the length of the array. Can also be accessed using the
+    Twig <code>length</code> filter.</p>
+  {% example %}
+    <pre>Length: {{ simpleArray|length }}</pre>
+  {% endexample %}
+
+
+  <h3>getHtml / html</h3>
+  <p>The <code>html</code> methods renders all items and returns the
+    results. Use it if you need to store the rendered output to a variable
+    or if you need to pass it to a function.</p>
+  <p>You can pass additional variables to all instances by passing an object
+    as the first argument.</p>
+  {% example %}
+    {% set content = instanceArray.html({
+      info: 'I am a shared variable.'
+    }) %}
+
+    {{ content }}
+  {% endexample %}
+
+
+  <h2>hasValue / isEmpty</h2>
+  <p>The methods <code>isEmpty</code> and <code>hasValue</code> can be used
+    to check whether an array contains items.</p>
+  {% example %}
+    {%- if simpleArray.hasValue -%}
+      <div class="alert alert-success" role="alert">Array contains items.</div>
+    {%- else -%}
+      <div class="alert alert-danger" role="alert">Array contains no items.</div>
+    {%- endif -%}
+  {% endexample %}
+{% endblock %}

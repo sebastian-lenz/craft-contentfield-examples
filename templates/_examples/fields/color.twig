@@ -1,0 +1,108 @@
+label: "Field: Color"
+rootSchema: true
+
+fields:
+  # A color field allows users to pick a custom color.
+  simpleColor:
+    type: color
+
+  # By default only a rgb color can be chosen. Set `alpha`
+  # to true to allow users to select a rgba color.
+  alphaColor:
+    type: color
+    alpha: true
+
+  # You can pass a set of predefined colors using the swatches
+  # attribute. Remember you must quote values starting with a
+  # hash in yaml.
+  swatchesColor:
+    type: color
+    swatches:
+      - "#f00"
+      - "#0f0"
+      - "#00f"
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Color field</h1>
+  <p>Color fields expose an instance of
+    <code><a href="https://github.com/sebastian-lenz/craft-contentfield/blob/master/src/models/values/ColorValue.php">ColorValue</a></code>
+    to templates.</p>
+
+
+  <h2>Rendering</h2>
+
+  <p>Color fields return a hex color string for colors without an alpha
+    value and a rgba color definition for colors with an alpha value:</p>
+  {% example %}
+    <div class="text-center">
+      <p style="background:{{ simpleColor }};">Simple color</p>
+      <p style="background:{{ alphaColor }};">Alpha color</p>
+    </div>
+  {% endexample %}
+
+
+  <h2>Attributes</h2>
+
+  <h3>alpha</h3>
+  <p>Stores the alpha component.</p>
+  {% example %}
+    <pre>{{ simpleColor.alpha }}</pre>
+  {% endexample %}
+
+
+  <h3>blue</h3>
+  <p>Stores the blue color component.</p>
+  {% example %}
+    <pre>{{ simpleColor.blue }}</pre>
+  {% endexample %}
+
+
+  <h3>green</h3>
+  <p>Stores the green color component.</p>
+  {% example %}
+    <pre>{{ simpleColor.green }}</pre>
+  {% endexample %}
+
+
+  <h3>red</h3>
+  <p>Stores the red color component.</p>
+  {% example %}
+    <pre>{{ simpleColor.red }}</pre>
+  {% endexample %}
+
+
+  <h2>Methods</h2>
+
+  <h3>getCssValue / cssValue</h3>
+  <p>Retrieves the css representation of the selected color as a string.
+    Useful if you want to pass the value to another function.</p>
+
+  {% example %}
+    <pre>
+      {{- attr({
+        "data-color": simpleColor.cssValue
+      }) -}}
+    </pre>
+  {% endexample %}
+
+
+  <h3>getHex / hex</h3>
+  <p>If you explicitly need a hex color, use the <code>hex</code> method.</p>
+  {% example %}
+    <pre>{{ alphaColor.hex }}</pre>
+  {% endexample %}
+
+
+  <h3>getRgba / rgba</h3>
+  <p>If you explicitly need a rgba color, use the <code>rgba</code> method.</p>
+  {% example %}
+    <pre>{{ simpleColor.rgba }}</pre>
+  {% endexample %}
+
+  <p>The rgba method lets you set the alpha value on the fly.</p>
+  {% example %}
+    <pre>{{ simpleColor.rgba(0.5) }}</pre>
+  {% endexample %}
+{% endblock %}

@@ -1,0 +1,105 @@
+label: "Field: Select"
+rootSchema: true
+
+# Prints the label of the selected option when previewed.
+preview: >
+  {{ selectField }}
+
+fields:
+  # A select field allows users to pick one of several predefined
+  # options. The attribute `options` must be set to an object
+  # defining the options.
+  selectField:
+    type: select
+    options:
+      first: First option
+      second: Second option
+
+  # A default option can be set using the attribute `defaultValue`.
+  defaultValueSelect:
+    type: select
+    defaultValue: second
+    options:
+      first: First option
+      second: Second option
+
+  # Options can define additional properties that can be accessed
+  # within the template
+  customDataSelect:
+    type: select
+    options:
+      col-4-8:
+        label: Narrow left column, wide right column
+        leftClass: col-md-5
+        rightClass: col-md-7
+      col-6-6:
+        label: Equal sized columns
+        leftClass: col-md-6
+        rightClass: col-md-6
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Select field</h1>
+  <p>Select fields expose an instance of
+    <code><a href="https://github.com/sebastian-lenz/craft-contentfield/blob/master/src/models/values/EnumerationValue.php">EnumerationValue</a></code>
+    to templates.</p>
+
+  <h2>Rendering</h2>
+  <p>Rendering a select field will return the key of the selected option.</p>
+  {% example %}
+    <pre>{{ selectField }}</pre>
+  {% endexample %}
+
+
+  <h2>Methods</h2>
+
+  <h3>contains</h3>
+  <p>Checks whether the select field contains the given value.</p>
+  {% example %}
+    {%- if selectField.contains('first') -%}
+      <div class="alert alert-success" role="alert">Select contains "first"</div>
+    {%- else -%}
+      <div class="alert alert-danger" role="alert">Select does not contain "first"</div>
+    {%- endif -%}
+  {% endexample %}
+
+
+  <h3>getCustomData / customData</h3>
+  <p>Returns custom data set on the currently selected option.</p>
+  {% example %}
+    <pre>leftClass: {{ customDataSelect.customData('leftClass') }}</pre>
+  {% endexample %}
+
+  <p>The enumeration value also contains magic methods that retrieve
+    custom data directly.</p>
+  {% example %}
+    <div class="row">
+      <div class="{{ customDataSelect.leftClass }}">
+        <p>Quisque malesuada placerat nisl. Fusce convallis metus id felis luctus adipiscing. In hac habitasse platea dictumst.</p>
+      </div>
+      <div class="{{ customDataSelect.rightClass }}">
+        <p>Donec mollis hendrerit risus. Vivamus consectetuer hendrerit lacus. Vestibulum fringilla pede sit amet augue. Cras ultricies mi eu turpis hendrerit fringilla.</p>
+      </div>
+    </div>
+  {% endexample %}
+
+  <h3>getValue / value</h3>
+  <p>Retrieves the selected value as a plain PHP value (string or number). Useful
+    if you must pass the selected option to a function or query.</p>
+  {% example %}
+    <pre>{{ selectField.value }}</pre>
+  {% endexample %}
+
+
+  <h3>isEmpty / hasValue</h3>
+  <p>The methods <code>isEmpty</code> and <code>hasValue</code> can be used
+    to check whether a select field is set to a value.</p>
+  {% example %}
+    {%- if selectField.hasValue -%}
+      <div class="alert alert-success" role="alert">Select has a value.</div>
+    {%- else -%}
+      <div class="alert alert-danger" role="alert">Select has no value.</div>
+    {%- endif -%}
+  {% endexample %}
+{% endblock %}

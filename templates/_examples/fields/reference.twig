@@ -1,0 +1,156 @@
+label: "Field: Reference"
+rootSchema: true
+
+# Renders a large thumbnail of the references when previewed.
+preview: >
+  {{ simpleReference }}
+
+fields:
+  # A reference field allows users to pick on or more elements of
+  # the same type. The attribute `elementType` must be set to an element
+  # class.
+  simpleReference:
+    type: reference
+    elementType: craft\elements\Entry
+
+  # Set the attribute `limit` to sepecify the maximum number of allowed
+  # references
+  limitReference:
+    type: reference
+    elementType: craft\elements\Asset
+    limit: 1
+
+  # Asset references use the large thumbnail by default, set `viewMode` to
+  # `small` to use a more compact view.
+  viewModeReference:
+    type: reference
+    elementType: craft\elements\Asset
+    viewMode: small
+
+  # You can set the attribute `sources` to limit the sections or volumes
+  # references can be picked from.
+  # The content field ships with a utility that lists all available sources,
+  # visit `Utilities` > `Content field utilities` > `sources`.
+  sourcesReference:
+    type: reference
+    elementType: craft\elements\Asset
+    sources:
+      - folder:fb0d6119-7d91-47e4-9296-218eb7417883
+
+  # Use the attribute `criteria` to specify advanced filters that must apply
+  # to the available elements.
+  # This field allows only selecting entries that are live.
+  criteriaReference:
+    type: reference
+    elementType: craft\elements\Entry
+    criteria:
+      status: live
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Reference field</h1>
+  <p>Reference fields expose an instance of
+    <code><a href="https://github.com/sebastian-lenz/craft-contentfield/blob/master/src/models/values/ReferenceValue.php">ReferenceValue</a></code>
+    to templates.</p>
+
+  <h2>Rendering</h2>
+  <p>When rendering reference fields directly, the titles of the linked references
+    get rendered.</p>
+  {% example %}
+    <p>{{ simpleReference }}</p>
+  {% endexample %}
+
+  <h3>Iterating</h3>
+  <p>A reference field can be looped over using the Twig <code>for</code> tag.
+    The field returns the fully loaded element for each referenced element.</p>
+  {% example %}
+    <table class="table">
+      {% for reference in simpleReference %}
+        <tr>
+          <td>{{ reference.title }}</td>
+          <td>{{ reference.url }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% endexample %}
+
+  <h3>Array access</h3>
+  <p>Reference fields support the array access syntax to retrieve individual
+    items. Remember to check for existence when using this syntax.</p>
+
+  {% example %}
+    {%- if simpleReference|length > 0 -%}
+      <p>{{ simpleReference[0].title }}</p>
+    {%- endif -%}
+  {% endexample %}
+
+
+  <h2>Methods</h2>
+
+  <h3>count</h3>
+  <p>Returns the number of references. Can also be accessed using the
+    Twig <code>length</code> filter.</p>
+  {% example %}
+    <pre>Length: {{ simpleReference|length }}</pre>
+  {% endexample %}
+
+
+  <h3>getFirst / first</h3>
+  <p>Retrieves the first referenced element. Returns <code>null</code> if
+    there are no references set.</p>
+  {% example %}
+    {%- if simpleReference.hasValue -%}
+      <p>
+        <a class="btn btn-primary" href="{{ simpleReference.first.url }}">
+          {{- simpleReference.first.title -}}
+        </a>
+      </p>
+    {%- endif -%}
+  {% endexample %}
+
+
+  <h3>getReferencedIds / referencedIds</h3>
+  <p>Returns an array of all selected element ids. Useful if you need
+    to pass them to another function or query.</p>
+  {% example %}
+    <pre>IDs: {{ simpleReference.referencedIds|join(', ') }}</pre>
+  {% endexample %}
+
+
+  <h3>getReferences / references</h3>
+  <p>Returns an array of all selected elements. Useful if you need
+    to pass them to another function or query.</p>
+  {% example %}
+    {% set referenceArray = simpleReference.references %}
+    <ul>
+      {% for reference in referenceArray %}
+        <li>{{ reference.title }}</li>
+      {% endfor %}
+    </ul>
+  {% endexample %}
+
+
+  <h3>hasValue / isEmpty</h3>
+  <p>The methods <code>hasValue</code> and <code>isEmpty</code> can be used
+    to check whether the field contains a value.</p>
+  {% example %}
+    {%- if simpleReference.hasValue -%}
+      <div class="alert alert-success" role="alert">Reference has a value.</div>
+    {%- else -%}
+      <div class="alert alert-danger" role="alert">Reference has no value.</div>
+    {%- endif -%}
+  {% endexample %}
+
+
+  <h3>imageTag</h3>
+  <p>Renders the first reference using the built in image tag generator.</p>
+  {% example %}
+    {{ viewModeReference.imageTag({
+      type: 'default',
+      attributes: {
+        class: 'figure-img img-fluid rounded'
+      }
+    }) }}
+  {% endexample %}
+{% endblock %}

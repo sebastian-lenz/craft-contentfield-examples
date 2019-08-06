@@ -1,0 +1,177 @@
+label: "Field: Instance"
+rootSchema: true
+
+# You can show the preview of an instance by printing it.
+preview: >
+  {{ simpleInstance }}
+
+fields:
+  # An instance field embeds the form of another instance. You
+  # must always specify the `schemas` attribute.
+  simpleInstance:
+    type: instance
+    schemas: _examples/fields/blocks/text-image
+
+  # You can specify multiple schemas as an array. The user will be
+  # able to pick one of the supplied instances in the control panel.
+  multipleSchemasInstance:
+    type: instance
+    schemas:
+      - _examples/fields/blocks/image
+      - _examples/fields/blocks/text-image
+
+  # The schemas attribute also accepts a pattern, allowing whole
+  # directories of templates to be specified.
+  wildcardInstance:
+    type: instance
+    schemas: _examples/fields/blocks/*
+
+  # If your instance form is long or you would like to achieve an
+  # appearance more in line with the array field, you can set the
+  # collapsible attribute to true. The field will look like an array
+  # field but without the possibility of adding/removing items.
+  collapsibleInstance:
+    type: instance
+    schemas: _examples/fields/blocks/*
+    collapsible: true
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Instance field</h1>
+  <p>Instance fields expose an instance of
+    <code><a href="https://github.com/sebastian-lenz/craft-contentfield/blob/master/src/models/values/InstanceValue.php">InstanceValue</a></code>
+    to templates.</p>
+
+
+  <h2>Rendering</h2>
+
+  <h3>Field access</h3>
+  <p>You can access all fields on an instance using object notion.</p>
+  {% example %}
+    <table class="table">
+      <tr>
+        <td>image</td>
+        <td>{{ simpleInstance.image }}</td>
+      </tr>
+      <tr>
+        <td>body</td>
+        <td>{{ simpleInstance.body }}</td>
+      </tr>
+    </table>
+  {% endexample %}
+
+
+  <h3>{{ '{% display %}' }}</h3>
+  <p>Use the <code>display</code> helper to render an instance.
+    If you need the rendered output as a variable, please use the
+    <code>html</code> method.</p>
+  {% example %}
+    {% display simpleInstance %}
+  {% endexample %}
+
+
+  <h3>{{ '{% display with %}' }}</h3>
+  <p>The display helper can also pass additional variables to the
+    instance. To do this, use the <code>with</code> keyword.</p>
+
+  {% example %}
+    {% display simpleInstance with {
+      info: 'I am a shared variable.'
+    } %}
+  {% endexample %}
+
+
+  <h2>Methods</h2>
+
+  <h3>getHtml / html</h3>
+  <p>The <code>getHtml</code> method renders an instance and returns the
+    results. Use it if you need to store the rendered output to a variable
+    or if you need to pass it to a function.</p>
+  <p>You can pass additional variables to the instance by passing an object
+    as the first argument.</p>
+
+  {% example %}
+    {% set content = simpleInstance.html({
+      info: 'I am a shared variable.'
+    }) %}
+
+    {{ content }}
+  {% endexample %}
+
+
+  <h3>getType / type</h3>
+  <p>You can check which type an instance is of by using the
+    <code>getType</code> method. The method will return a complete
+    schema qualifier which always has the form
+    <code>schemaType:schemaName</code>.</p>
+  {% example %}
+    <pre>{{ wildcardInstance.type }}</pre>
+  {% endexample %}
+
+  <p>You can use the <code>type</code> attribute in conjunction with
+    Crafts <code>switch</code> block:</p>
+  {% example %}
+    {% switch wildcardInstance.type %}
+    {% case 'template:_examples/fields/blocks/image' %}
+      <div class="alert alert-info" role="alert">I am an image block</div>
+    {% case 'template:_examples/fields/blocks/text' %}
+      <div class="alert alert-info" role="alert">I am a text block</div>
+    {% case 'template:_examples/fields/blocks/text-image' %}
+      <div class="alert alert-info" role="alert">I am a text/image block</div>
+    {% endswitch %}
+  {% endexample %}
+
+
+  <h3>getUuid / uuid</h3>
+  <p>All instances have a unique id, you can access it using the
+    <code>getUuid</code> method.</p>
+  {% example %}
+    <pre>{{ simpleInstance.uuid }}</pre>
+  {% endexample %}
+
+
+  <h3>hasValue / isEmpty</h3>
+  <p>The methods <code>isEmpty</code> and <code>hasValue</code> can be used
+    to check whether an instance field is set to a value.</p>
+  {% example %}
+    {%- if simpleInstance.hasValue -%}
+      <div class="alert alert-success" role="alert">Instance has a value.</div>
+    {%- else -%}
+      <div class="alert alert-danger" role="alert">Instance has no value.</div>
+    {%- endif -%}
+  {% endexample %}
+
+
+  <h3>isOfType</h3>
+  <p>The <code>isOfType</code> method performs a schema match similar to the
+    way schemas are collected by the <code>schema</code> attribute.</p>
+  {% example %}
+    {% if wildcardInstance.isOfType('_examples/fields/blocks/text') %}
+      <div class="alert alert-success" role="alert">I am a text block</div>
+    {% else %}
+      <div class="alert alert-danger" role="alert">I am not a text block</div>
+    {% endif %}
+  {% endexample %}
+
+  <p>You can check for multiple types by passing an array.</p>
+  {% example %}
+    {% if wildcardInstance.isOfType([
+      '_examples/fields/blocks/image',
+      '_examples/fields/blocks/text-image'
+    ]) %}
+      <div class="alert alert-success" role="alert">I contain an image</div>
+    {% else %}
+      <div class="alert alert-danger" role="alert">I do not contain an image</div>
+    {% endif %}
+  {% endexample %}
+
+  <p>You can check the type against a wildcard.</p>
+  {% example %}
+    {% if wildcardInstance.isOfType('_examples/fields/blocks/text*') %}
+      <div class="alert alert-success" role="alert">I contain text</div>
+    {% else %}
+      <div class="alert alert-danger" role="alert">I do not contain text</div>
+    {% endif %}
+  {% endexample %}
+{% endblock %}

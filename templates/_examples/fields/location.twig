@@ -1,0 +1,95 @@
+label: "Field: Location"
+rootSchema: true
+
+# Locations render a static map when previewed.
+preview: >
+  {{ simpleLocation }}
+
+fields:
+  # A location field allows users to pick a location on a map.
+  # In order for the map to work properly, you must specify a
+  # Google Maps API key in the field settings.
+  simpleLocation:
+    type: location
+
+  # You can specify a default location. The marker will be placed
+  # here when creating new entries.
+  defaultValueLocation:
+    type: location
+    defaultValue:
+      latitude: 40.712776
+      longitude: -74.005974
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Location field</h1>
+  <p>Location fields expose an instance of
+    <code><a href="https://github.com/sebastian-lenz/craft-contentfield/blob/master/src/models/values/LocationValue.php">LocationValue</a></code>
+    to templates.</p>
+
+  <h2>Rendering</h2>
+  <p>Location fields render their latitude and longitude separated by a "," by default.</p>
+  {% example %}
+    <pre>{{ simpleLocation }}</pre>
+  {% endexample %}
+
+  <p>You usually need some kind of JavaScript component to display the location data.</p>
+  {% example %}
+    <div
+      class="mb-3"
+      data-location="{{ simpleLocation }}"
+      id="map"
+      style="height:0;padding-bottom: 50%;"
+    ></div>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"></script>
+    <script>
+      function initMap() {
+        var element = document.getElementById('map');
+        var location = element.getAttribute('data-location').split(',');
+        var latLng = {
+          lat: parseFloat(location[0]),
+          lng: parseFloat(location[1])
+        };
+
+        new google.maps.Marker({
+          map: new google.maps.Map(element, {
+            zoom: 12,
+            center: latLng
+          }),
+          position: latLng
+        });
+      }
+    </script>
+  {% endexample %}
+
+
+  <h2>Attributes</h2>
+
+  <h3>latitude</h3>
+  <p>Returns the selected latitude.</p>
+  {% example %}
+    <pre>{{ simpleLocation.latitude }}</pre>
+  {% endexample %}
+
+  <h3>longitude</h3>
+  <p>Returns the selected longitude.</p>
+  {% example %}
+    <pre>{{ simpleLocation.longitude }}</pre>
+  {% endexample %}
+
+
+  <h2>Functions</h2>
+
+  <h2>hasValue / isEmpty</h2>
+  <p>The functions <code>hasValue</code> and <code>isEmpty</code> can be used
+    to check whether the field contains a value.</p>
+  {% example %}
+    {%- if simpleLocation.hasValue -%}
+      <div class="alert alert-success" role="alert">Location has a value.</div>
+    {%- else -%}
+      <div class="alert alert-danger" role="alert">Location has no value.</div>
+    {%- endif -%}
+  {% endexample %}
+{% endblock %}

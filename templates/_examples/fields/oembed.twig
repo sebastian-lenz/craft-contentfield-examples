@@ -1,0 +1,122 @@
+label: "Field: oEmbed"
+rootSchema: true
+
+# oEmbeds render a summary when previewed.
+preview: >
+  {{ simpleOEmbed }}
+
+fields:
+  # A oEmbed field allows users to enter tge url of an oembed service.
+  # The field displays a short information about the media that will
+  # be embedded.
+  # You must specify a list of allowed providers. The field uses the provider
+  # defined here: https://oembed.com/providers.json
+  simpleOEmbed:
+    type: oembed
+    providers:
+      - youtube
+      - vimeo
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>oEmbed field</h1>
+  <p>oEmbed fields expose an instance of
+    <code><a href="https://github.com/sebastian-lenz/craft-contentfield/blob/master/src/models/values/OEmbedValue.php">OEmbedValue</a></code>
+    to templates.</p>
+
+  <h2>Rendering</h2>
+  <p>When rendering an oEmbed field, the entered url will be returned.</p>
+  {% example %}
+    <pre>{{ simpleOEmbed }}</pre>
+  {% endexample %}
+
+
+  <h3>{{ '{% display %}' }}</h3>
+  <p>Use the display tag to render the embed code of the selected media.
+    If you need the rendered output as a variable, please see the
+    <code>html</code> function.</p>
+  {% example %}
+    {% display simpleOEmbed %}
+  {% endexample %}
+
+  <h3>{{ '{% display with %}' }}</h3>
+  <p>You can modify the embed code by passing an option object to the
+    display helper using the <code>with</code> argument. You can modify
+    both the <code>attributes</code> of the iframe as well as the
+    <code>query</code> parameters of the embed url:</p>
+  <ul>
+    <li>Set an attribute by providing a value. Overwrites existing values.</li>
+    <li>Remove an attribute by setting it to <code>null</code>.</li>
+    <li>Rename an attribute by passing an object containing a <code>rename</code>
+      attribute.</li>
+  </ul>
+
+  {% example %}
+    {% display simpleOEmbed with {
+      attributes: {
+        allow: null,
+        allowfullscreen: null,
+        id: 'myEmbed',
+      },
+      query: {
+        autoplay: 1,
+        fs: 0,
+        modestbranding: 1,
+        rel: 0,
+      }
+    } %}
+  {% endexample %}
+
+
+  <h2>Methods</h2>
+
+  <h3>getHtml / html</h3>
+  <p>Renders the embed code and returns is as a twig <code>Markup</code> instance.
+    Accepts the same option object like the <code>display</code> tag.</p>
+  {% example %}
+    {% set html = simpleOEmbed.html({
+      attributes: {
+        id: 'mySecondEmbed',
+      },
+    }) %}
+
+    {{ html }}
+  {% endexample %}
+
+
+  <h3>getOEmbed / oembed</h3>
+  <p>Returns the metadata provided by the oEmbed api. Returns <code>null</code>
+    if no valid oembed url has been entered.</p>
+  {% example %}
+    {%- if simpleOEmbed.hasValue -%}
+      <table class="table">
+        {% for key, value in simpleOEmbed.oembed %}
+          <tr>
+            <td>{{ key }}</td>
+            <td>{{ value }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    {%- endif -%}
+  {% endexample %}
+
+
+  <h3>getUrl / url</h3>
+  <p>Returns the url the field is pointing to.</p>
+  {% example %}
+    <pre>{{ simpleOEmbed.url }}</pre>
+  {% endexample %}
+
+
+  <h3>hasValue / isEmpty</h3>
+  <p>The methods <code>hasValue</code> and <code>isEmpty</code> can be used
+    to check whether the field contains a value.</p>
+  {% example %}
+    {%- if simpleOEmbed.hasValue -%}
+      <div class="alert alert-success" role="alert">oEmbed has a value.</div>
+    {%- else -%}
+      <div class="alert alert-danger" role="alert">oEmbed has no value.</div>
+    {%- endif -%}
+  {% endexample %}
+{% endblock %}

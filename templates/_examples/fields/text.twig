@@ -1,0 +1,56 @@
+label: "Field: Text"
+rootSchema: true
+
+# You can print the value of a text field in the preview
+preview: >
+  {{ textField }}
+
+fields:
+  # A text field allows users to enter a string.
+  textField:
+    type: text
+
+  # A placeholder text can be set for the field.
+  placeholderField:
+    type: text
+    placeholder: Enter some text!
+
+  # The input type can be changed using `inputType`. The following
+  # values are allowed: `email`, `password`, `search`, `tel`,
+  # `text` and `url`. Defaults to `text`.
+  emailField:
+    type: text
+    inputType: email
+
+  # The maximum allowed string length may be specified.
+  maxLengthField:
+    type: text
+    maxLength: 10
+
+  # A regular expression may be specified.
+  patternField:
+    type: text
+    pattern: /^(#?)[0-9a-fA-F]*$/
+
+  # Use the rules attribute to mark text fields as required.
+  requiredField:
+    type: text
+    rules: required
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Text field</h1>
+  <p>Text fields expose a <code>string</code> value to templates.</p>
+
+  <h2>Rendering</h2>
+  <p>Text fields expose a string and can be rendered directly:</p>
+  {% example %}
+    <p>{{ textField }}</p>
+  {% endexample %}
+
+  <p>As a php string is exposed, all string filters of twig work as expected:</p>
+  {% example %}
+    <p>{{ textField|upper }}</p>
+  {% endexample %}
+{% endblock %}
