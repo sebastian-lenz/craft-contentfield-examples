@@ -1,0 +1,35 @@
+# This file defines globally available structures. Schemas defined
+# in this file can be referred to in instance fields using a qualifier
+# in the form of
+#   structure:{NAME}
+# e.g.
+#   structure:myGlobalText
+#
+# Structures behave like templates, they share all the same attributes.
+# However, for obvious reasons, they cannot be rendered or used with the
+# {% display %} tag.
+
+myGlobalText:
+  label: Text
+  icon: material:format_align_left
+  preview: >
+    {{ body }}
+  fields:
+    body: redactor
+
+myGlobalTitle:
+  label: Title
+  icon: material:title
+  preview: >
+    <h1>{{ title }}</h1>
+  fields:
+    size:
+      type: select
+      width: 150px
+      options:
+        h1: Headline 1
+        h2: Headline 2
+        h3: Headline 3
+    title:
+      type: text
+      width: calc(100% - 150px)
