@@ -1,0 +1,139 @@
+# Templates are defined by regular twig files containing
+# a yaml header separated by three minus signs `---` on an
+# empty line.
+#
+# - The yaml part stores various meta data about the template,
+#   including the data fields required for the template to be
+#   rendered.
+# - The twig part is a regular Craft template which has access
+#   to all features the CMS exposes. Additionally, the previously
+#   defined fields can be used.
+
+
+# Common attributes
+# -----------------
+
+# A human readable name of this schema.
+label: "Schemas: Templates"
+
+# Marks this schema as a root schema. Only used to tidy up the cp field settings.
+rootSchema: true
+
+# The name of the icon that represents this schema.
+# Use the icon utility to get a list of all available icons at
+#   Utilities > Content field utilities > Icons
+icon: material:format_shapes
+
+# A map of fields attached to this schema.
+# See the fields example section for an overview of available fields.
+fields:
+  image:
+    type: image
+    group: { gridArea: left }
+  title:
+    type: text
+    group: { gridArea: right }
+  body:
+    type: redactor
+  elements:
+    type: instances
+    schemas: _examples/fields/blocks/*
+    group: { gridArea: bottom }
+
+
+# Preview attributes
+# ------------------
+
+# A handlebars template used to display instances of this schema in
+# the editor.
+preview: >
+  <h1>title</h1>
+  {{ body }}
+
+# The name of an asset reference field whose image will be used as an
+# replacement of the icon the header.
+previewImage: image
+
+# A template for a short text displayed in the header of an instance
+# next to the type name.
+# Can be set to the name of a single field as a shorthand:
+previewLabel: title
+
+
+# Styling
+# -------
+
+# Defines the css grid layout of this schema. Grid layout is used
+# to place the field groups within the schema form.
+#
+# This is a shorthand for:
+# ```
+# style:
+#   medium:
+#     grid: <value>
+# ```
+grid: >
+  "left right" auto
+  "bottom bottom" auto
+  / 100px 1fr
+
+# The css styles applied to form of this instance, grouped by breakpoint.
+style:
+  large:
+    grid: >
+      "left right" auto
+      "bottom bottom" auto
+      / 150px 1fr
+
+
+# Advanced
+# --------
+
+# Constants
+# Defines constants that can be used within the template.
+# See example `_examples/misc/constants`.
+
+# Model
+# The fully qualified name of the model class that should be attached
+# to this schema.
+# See example `_examples/misc/models`.
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Templates</h1>
+  <p>Templates are the core building blocks within the content field.
+    Within their twig section, they have full access to all template
+    features exposed by Craft.</p>
+  {% example %}
+    {% set someEntry = craft.entries.section('examples').one() %}
+    <p>
+      <a href="{{ someEntry.url }}" class="btn btn-primary">{{ someEntry.title }}</a>
+    </p>
+  {% endexample %}
+
+  <p>Additionally, all fields defined in the yaml header are exposed
+    as variables to the template and can be used directly.</p>
+  {% example %}
+    <table class="table">
+      <tr>
+        <td>image</td>
+        <td>{{ image }}</td>
+      </tr>
+      <tr>
+        <td>title</td>
+        <td>{{ title }}</td>
+      </tr>
+      <tr>
+        <td>body</td>
+        <td>{{ body }}</td>
+      </tr>
+    </table>
+  {% endexample %}
+
+  <p>To build template hierarchies, use <a href="array-field">array</a>
+    and <a href="instance-field">instance</a> fields.</p>
+  {% example %}
+    {% display elements %}
+  {% endexample %}
+{% endblock %}

@@ -1,0 +1,79 @@
+label: "Schemas: Global structures"
+rootSchema: true
+
+# This example uses global structures. Global structures are defined in
+#   config/content/structures.yml
+# and can be used within the instance field (and therefore
+# in arrays of instance fields).
+fields:
+  structureInstance:
+    type: instance
+    schemas: structure:myGlobalTitle
+  structureArray:
+    type: instances
+    schemas:
+     - structure:myGlobalTitle
+     - structure:myGlobalText
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Global structures</h1>
+  <p>Global structures are defined in a configuration file and can be used
+    within any other schema. They behave like all other schemas except that
+    they cannot be rendered or used in combination with the
+    <code>{{ '{% display %}' }}</code> tag.</p>
+
+  <h3>Field access</h3>
+  <p>You can access all fields on a structure using object notion.</p>
+  {% example %}
+    <table class="table">
+      <tr>
+        <td>size</td>
+        <td>{{ structureInstance.size }}</td>
+      </tr>
+      <tr>
+        <td>title</td>
+        <td>{{ structureInstance.title }}</td>
+      </tr>
+    </table>
+  {% endexample %}
+
+  <h3>Schema data</h3>
+  <p>You can retrieve information about the schema of a structure in
+    your template using the <code>getSchema</code> method on instances.</p>
+  {% example %}
+    <table class="table">
+      <tr>
+        <td>Qualifier</td>
+        <td>{{ structureInstance.schema.qualifier }}</td>
+      </tr>
+      <tr>
+        <td>Name</td>
+        <td>{{ structureInstance.schema.name }}</td>
+      </tr>
+    </table>
+  {% endexample %}
+
+  <h3>{{ '{% switch %}' }}</h3>
+  <p>Use <code>schema.name</code> in conjunction with Crafts
+    <code>{{ '{% switch %}' }}</code> twig tag to render varying
+    structures.</p>
+  {% example %}
+    {% for structure in structureArray %}
+      {% switch structure.schema.name %}
+      {% case 'myGlobalText' %}
+        <div class="myGlobalText">
+          {{ structure.body }}
+        </div>
+
+      {% case 'myGlobalTitle' %}
+        <div class="myGlobalTitle">
+        <{{ structure.size }}>
+        {{ structure.title }}
+        </{{ structure.size }}>
+        </div>
+      {% endswitch %}
+    {% endfor %}
+  {% endexample %}
+{% endblock %}

@@ -1,0 +1,106 @@
+label: "Schemas: Local structures"
+rootSchema: true
+
+# Structure can be defined locally within templates using the `structures`
+# attribute. The following example defines two local structures `myLocalTitle`
+# and `myLocalText`.
+structures:
+  myLocalText:
+    label: Text
+    icon: material:format_align_left
+    preview: >
+      {{ body }}
+    fields:
+      body: redactor
+
+  myLocalTitle:
+    label: Title
+    icon: material:title
+    preview: >
+      <h1>{{ title }}</h1>
+    fields:
+      size:
+        type: select
+        width: 150px
+        options:
+          h1: Headline 1
+          h2: Headline 2
+          h3: Headline 3
+      title:
+        type: text
+        width: calc(100% - 150px)
+
+# Structure schemas can be used within the instance field (and therefore
+# in arrays of instances).
+fields:
+  structureInstance:
+    type: instance
+    schemas: structure:myLocalTitle
+  structureArray:
+    type: instances
+    schemas:
+     - structure:myLocalTitle
+     - structure:myLocalText
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Local structures</h1>
+  <p>Local structures are defined within templates and can only be used
+    within the same file. They behave like all other schemas except that
+    they cannot be rendered or used in combination with the
+    <code>{{ '{% display %}' }}</code> tag.</p>
+
+  <h3>Field access</h3>
+  <p>You can access all fields on a structure using object notion.</p>
+  {% example %}
+    <table class="table">
+      <tr>
+        <td>size</td>
+        <td>{{ structureInstance.size }}</td>
+      </tr>
+      <tr>
+        <td>title</td>
+        <td>{{ structureInstance.title }}</td>
+      </tr>
+    </table>
+  {% endexample %}
+
+  <h3>Schema data</h3>
+  <p>You can retrieve information about the schema of a structure in
+    your template using the <code>getSchema</code> method on instances.</p>
+  {% example %}
+    <table class="table">
+      <tr>
+        <td>Qualifier</td>
+        <td>{{ structureInstance.schema.qualifier }}</td>
+      </tr>
+      <tr>
+        <td>Name</td>
+        <td>{{ structureInstance.schema.name }}</td>
+      </tr>
+    </table>
+  {% endexample %}
+
+  <h3>{{ '{% switch %}' }}</h3>
+  <p>Use <code>schema.name</code> in conjunction with Crafts
+    <code>{{ '{% switch %}' }}</code> twig tag to render varying
+    structures.</p>
+  {% example %}
+    {% for structure in structureArray %}
+      {% switch structure.schema.name %}
+        {% case 'myLocalText' %}
+          <div class="myLocalText">
+            {{ structure.body }}
+          </div>
+
+        {% case 'myLocalTitle' %}
+          <div class="myLocalTitle">
+            <{{ structure.size }}>
+              {{ structure.title }}
+            </{{ structure.size }}>
+          </div>
+      {% endswitch %}
+    {% endfor %}
+  {% endexample %}
+{% endblock %}
