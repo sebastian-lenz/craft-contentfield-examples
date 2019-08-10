@@ -3,7 +3,8 @@
     "php": "^7.2",
     "craftcms/cms": "^3.2.1",
     "sebastianlenz/contentfield": "dev-release",
-    "vlucas/phpdotenv": "^2.4.0"
+    "vlucas/phpdotenv": "^2.4.0",
+    "ext-json": "*"
   },
   "autoload": {
     "psr-4": {
