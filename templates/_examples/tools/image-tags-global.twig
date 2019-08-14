@@ -1,0 +1,17 @@
+label: "Tools: Image tags - global"
+rootSchema: true
+fields:
+  image: image
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Image tags: Global</h1>
+  <p>In order to be able to reuse the image configurations, the plugin allows them to be
+    defined globally in <code>config/content/imagetags.yml</code>. When rendering an
+    image tag with a globally defined configuration, it is sufficient to pass the name
+    of the global configuration to the <code>imageTage</code> helper.</p>
+  {% example %}
+    <pre>{{ image.imageTag('myFluidImageTag') }}</pre>
+  {% endexample %}
+{% endblock %}

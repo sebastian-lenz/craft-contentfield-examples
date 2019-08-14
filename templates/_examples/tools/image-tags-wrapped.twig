@@ -1,0 +1,94 @@
+label: "Tools: Image tags - Wrapped"
+rootSchema: true
+fields:
+  image: image
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Image tags: Wrapped</h1>
+  <p>The wrapped image tag is an extension of the default image tags, so everything that
+    applies to the default image tag applies to the wrapped image tag too. Additionally,
+    the image will be wrapped inside a configurable tag.</p>
+  <p>You can specify the properties of the wrapping tag by using the
+    <code>wrapAttributes</code> config option. The following example uses the
+    <code>$aspectStyle</code> variable to create a responsive container that always
+    kepps the aspect ratio of the image.</p>
+  {% example %}
+    <style>
+      .myImageWrapper { position:relative; height:0; }
+      .myImageWrapper > img { position:absolute; height:100%; width: 100%; }
+    </style>
+    {{ image.imageTag({
+      type: 'wrapped',
+      wrapAttributes: {
+        class: 'myImageWrapper mb-3',
+        style: '$aspectStyle',
+      }
+    }) }}
+  {% endexample %}
+
+  <p>The wrapped image tag can be used in conjunction with various lazy loading
+    libraries. In the following example the image won't load, as we do not set the
+    <code>src</code> attribute. Instead we pass the source into the
+    <code>data-src</code> attribute so it can be read by javascript.</p>
+  {% example %}
+    {{ image.imageTag({
+      type: 'wrapped',
+      attributes: {
+        'data-src': '$src',
+      },
+      wrapAttributes: {
+        class: 'myImageWrapper mb-3',
+        style: '$aspectStyle',
+      }
+    }) }}
+  {% endexample %}
+
+  <p>When using some javascript to load your images, including a <code>noscript</code>
+    tag for search engines is usually a good idea. By setting <code>noscript</code> to
+    <code>true</code>, a fallback image will be rendered.</p>
+  <p>The <code>noscript</code> option alternatively accepts an attribute configuration
+    object (just like <code>attributes</code>) that defines the properties on the
+    image tag.</p>
+  {% example %}
+    {{ image.imageTag({
+      type: 'wrapped',
+      attributes: {
+        'data-src': '$src',
+      },
+      wrapAttributes: {
+        class: 'myImageWrapper mb-3',
+        style: '$aspectStyle',
+      },
+      noscript: true,
+    }) }}
+  {% endexample %}
+
+  <p>Use the <code>placeholderTag</code> option to render an additional tag inside the
+    wrapper, just before the image, a loading animation may be included that way.</p>
+  <p>Use it in combination with the <code>thumbnailTransform</code> to create a low
+    resolution version of the image.</p>
+  {% example %}
+    <style>
+      .myImagePlaceholder { position:absolute; height:100%; width: 100%; background-size: cover; }
+    </style>
+    {{ image.imageTag({
+      type: 'wrapped',
+      attributes: {
+        'data-src': '$src',
+      },
+      wrapAttributes: {
+        class: 'myImageWrapper mb-3',
+        style: '$aspectStyle',
+      },
+      thumbnailTransform: { mode: 'fit', width: 16, height: 16, format: 'png' },
+      placeholderTag: 'div',
+      placeholderAttributes: {
+        class: 'myImagePlaceholder',
+        style: '$thumbnailStyle',
+      }
+    }) }}
+  {% endexample %}
+
+{% endblock %}

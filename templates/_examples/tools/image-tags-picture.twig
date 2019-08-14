@@ -1,0 +1,35 @@
+label: "Tools: Image tags - Picture"
+rootSchema: true
+fields:
+  image: image
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Image tags: Picture</h1>
+  <p>The picture image tag generates a picture tag. The attribute <code>sources</code>
+    is required, it defines an array of possible sources. Each source must contain
+    a <code>transform(s)</code> attribute defining the image transforms associated
+    with that source. Additional attributes can be passed using the
+    <code>attributes</code> option to each source.</p>
+  {% example %}
+    {{ image.imageTag({
+      type: 'picture',
+      attributes: {
+        class: 'figure-img img-fluid rounded'
+      },
+      sources: [
+        {
+          attributes: { media: '(max-width: 991px)' },
+          transform: { mode: 'crop', width: 416, height: 293 },
+        }, {
+          transform: { mode: 'crop', width: 696, height: 489 },
+        }
+      ]
+    }) }}
+  {% endexample %}
+
+  <p>Like the wrapped image tag, pictures support noscript fallback images
+    and placeholder tags.</p>
+  <p><a href="image-tags-wrapped" class="btn btn-primary">Image tags: Wrapped</a></p>
+{% endblock %}

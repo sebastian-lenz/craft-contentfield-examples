@@ -1,0 +1,27 @@
+label: "Tools: Global fields"
+rootSchema: true
+fields:
+  # You can define fields globally in the configuration file `config/content/fields.yml`.
+  # All fields defined there can be used in any schemas by using their name as the `type`
+  # of a field.
+  # The following declaration creates a swatch color field whose options are globally
+  # defined.
+  swatchColor:
+    type: mySwatchColor
+
+  # You can overwrite all properties of the field if you wish to. Keep in mind that you
+  # can only completely reset an attribute.
+  alteredSwatchColor:
+    type: mySwatchColor
+    label: Custom color label
+    instructions: Please select a swatch color.
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Global fields</h1>
+  <p>Global fields behave exactly like the root field type in your template.</p>
+  {% example %}
+    <pre>{{ swatchColor }}</pre>
+  {% endexample %}
+{% endblock %}

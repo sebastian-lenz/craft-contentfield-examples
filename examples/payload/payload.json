@@ -38,10 +38,6 @@
             "title": "Array field",
             "slug": "array-field",
             "pageContent": {
-                "__originalUuid": null,
-                "__type": "template:_examples/fields/array",
-                "__uuid": "02f72373-6caa-4dc9-962d-87cec70b7633",
-                "__visible": true,
                 "simpleArray": [
                     "First value",
                     "Second value"
@@ -52,58 +48,62 @@
                 ],
                 "instanceArray": [
                     {
+                        "body": "<p>Ut id nisl quis enim dignissim sagittis. In hac habitasse platea dictumst. Aliquam eu nunc. Curabitur turpis. Nulla facilisi.</p>",
                         "__originalUuid": null,
                         "__type": "template:_examples/fields/blocks/text",
                         "__uuid": "cb49970f-3129-495b-adba-0e01362460e1",
-                        "__visible": true,
-                        "body": "<p>Ut id nisl quis enim dignissim sagittis. In hac habitasse platea dictumst. Aliquam eu nunc. Curabitur turpis. Nulla facilisi.</p>"
+                        "__visible": true
                     },
                     {
+                        "image": [
+                            "3030271d-1185-4870-9b46-e747905c540b"
+                        ],
                         "__originalUuid": null,
                         "__type": "template:_examples/fields/blocks/image",
                         "__uuid": "e8dd7967-9419-44fa-a8ce-969e364bd353",
-                        "__visible": true,
-                        "image": [
-                            "3030271d-1185-4870-9b46-e747905c540b"
-                        ]
+                        "__visible": true
                     }
                 ],
                 "instanceArrayAlias": [
                     {
+                        "body": "<p>Curabitur at lacus ac velit ornare lobortis. Phasellus tempus. Etiam ultricies nisi vel augue. Suspendisse nisl elit, rhoncus eget, elementum ac, condimentum eget, diam. In ut quam vitae odio lacinia tincidunt.</p>",
                         "__originalUuid": null,
                         "__type": "template:_examples/fields/blocks/text",
                         "__uuid": "13e175e1-684b-43f1-a251-650dca43c333",
-                        "__visible": true,
-                        "body": "<p>Curabitur at lacus ac velit ornare lobortis. Phasellus tempus. Etiam ultricies nisi vel augue. Suspendisse nisl elit, rhoncus eget, elementum ac, condimentum eget, diam. In ut quam vitae odio lacinia tincidunt.</p>"
+                        "__visible": true
                     }
                 ],
                 "previewModeArray": [
                     {
+                        "body": "<p>Nunc sed turpis. Nulla porta dolor. Etiam iaculis nunc ac metus. Donec posuere vulputate arcu. Vivamus aliquet elit ac nisl.</p>",
                         "__originalUuid": null,
                         "__type": "template:_examples/fields/blocks/text",
                         "__uuid": "0e9ee8b6-8778-48bf-a80b-dc27cbe2cc2c",
-                        "__visible": true,
-                        "body": "<p>Nunc sed turpis. Nulla porta dolor. Etiam iaculis nunc ac metus. Donec posuere vulputate arcu. Vivamus aliquet elit ac nisl.</p>"
+                        "__visible": true
                     },
                     {
+                        "image": [
+                            "3030271d-1185-4870-9b46-e747905c540b"
+                        ],
                         "__originalUuid": null,
                         "__type": "template:_examples/fields/blocks/image",
                         "__uuid": "d6179507-6bf2-42a0-bc18-6ce10d106fa1",
-                        "__visible": true,
-                        "image": [
-                            "3030271d-1185-4870-9b46-e747905c540b"
-                        ]
+                        "__visible": true
                     }
                 ],
                 "alwaysExpandedArray": [
                     {
+                        "body": "<p>Cras varius. Duis vel nibh at velit scelerisque suscipit. Phasellus magna. Suspendisse nisl elit, rhoncus eget, elementum ac, condimentum eget, diam. Ut varius tincidunt libero.</p>",
                         "__originalUuid": null,
                         "__type": "template:_examples/fields/blocks/text",
                         "__uuid": "214b5fa3-4559-46af-901b-59133b8ca55a",
-                        "__visible": true,
-                        "body": "<p>Cras varius. Duis vel nibh at velit scelerisque suscipit. Phasellus magna. Suspendisse nisl elit, rhoncus eget, elementum ac, condimentum eget, diam. Ut varius tincidunt libero.</p>"
+                        "__visible": true
                     }
-                ]
+                ],
+                "__originalUuid": null,
+                "__type": "template:_examples/fields/array",
+                "__uuid": "02f72373-6caa-4dc9-962d-87cec70b7633",
+                "__visible": true
             }
         },
         {
@@ -115,12 +115,12 @@
             "title": "Checkbox field",
             "slug": "checkbox-field",
             "pageContent": {
+                "simpleCheckbox": false,
+                "defaultValueCheckbox": true,
                 "__originalUuid": null,
                 "__type": "template:_examples/fields/checkbox",
                 "__uuid": "cb0ff049-c0c2-4255-ac41-1a31fb5a83bf",
-                "__visible": true,
-                "simpleCheckbox": false,
-                "defaultValueCheckbox": true
+                "__visible": true
             }
         },
         {
@@ -132,10 +132,6 @@
             "title": "Color field",
             "slug": "color-field",
             "pageContent": {
-                "__originalUuid": null,
-                "__type": "template:_examples/fields/color",
-                "__uuid": "b53b1689-0c37-49d8-8a0d-6809ca9b74c8",
-                "__visible": true,
                 "simpleColor": {
                     "alpha": 1,
                     "blue": 98,
@@ -153,7 +149,11 @@
                     "blue": 0,
                     "green": 255,
                     "red": 0
-                }
+                },
+                "__originalUuid": null,
+                "__type": "template:_examples/fields/color",
+                "__uuid": "b53b1689-0c37-49d8-8a0d-6809ca9b74c8",
+                "__visible": true
             }
         },
         {
@@ -165,46 +165,46 @@
             "title": "Instance field",
             "slug": "instance-field",
             "pageContent": {
-                "__originalUuid": null,
-                "__type": "template:_examples/fields/instance",
-                "__uuid": "c080bd8b-35a0-4163-9b87-e01869fd6cd3",
-                "__visible": true,
                 "simpleInstance": {
+                    "image": [
+                        "3030271d-1185-4870-9b46-e747905c540b"
+                    ],
+                    "body": "<p>Nullam sagittis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. In consectetuer turpis ut velit. Fusce commodo aliquam arcu. Fusce vulputate eleifend sapien.</p>",
                     "__originalUuid": null,
                     "__type": "template:_examples/fields/blocks/text-image",
                     "__uuid": "4ca96a49-a4e2-40e6-93c3-cbfcec652808",
-                    "__visible": true,
+                    "__visible": true
+                },
+                "multipleSchemasInstance": {
                     "image": [
                         "3030271d-1185-4870-9b46-e747905c540b"
                     ],
-                    "body": "<p>Nullam sagittis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. In consectetuer turpis ut velit. Fusce commodo aliquam arcu. Fusce vulputate eleifend sapien.</p>"
-                },
-                "multipleSchemasInstance": {
                     "__originalUuid": null,
                     "__type": "template:_examples/fields/blocks/image",
                     "__uuid": "0e649630-86b4-44c4-8f35-6d71f80c57fa",
-                    "__visible": true,
-                    "image": [
-                        "3030271d-1185-4870-9b46-e747905c540b"
-                    ]
+                    "__visible": true
                 },
                 "wildcardInstance": {
+                    "body": "<p>Etiam feugiat lorem non metus. Nam at tortor in tellus interdum sagittis. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. </p><p>Sed hendrerit. Nullam dictum felis eu pede mollis pretium.</p>",
                     "__originalUuid": null,
                     "__type": "template:_examples/fields/blocks/text",
                     "__uuid": "6327af8b-ca77-4453-b134-f0339260ad8e",
-                    "__visible": true,
-                    "body": "<p>Etiam feugiat lorem non metus. Nam at tortor in tellus interdum sagittis. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. </p><p>Sed hendrerit. Nullam dictum felis eu pede mollis pretium.</p>"
+                    "__visible": true
                 },
                 "collapsibleInstance": {
-                    "__originalUuid": null,
-                    "__type": "template:_examples/fields/blocks/text-image",
-                    "__uuid": "7a55ec44-128c-47d1-900c-cd17c4d59772",
-                    "__visible": true,
                     "image": [
                         "3030271d-1185-4870-9b46-e747905c540b"
                     ],
-                    "body": "<p>Mauris turpis nunc, blandit et, volutpat molestie, porta ut, ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. Etiam feugiat lorem non metus. Nunc interdum lacus sit amet orci. Donec id justo.</p>"
-                }
+                    "body": "<p>Mauris turpis nunc, blandit et, volutpat molestie, porta ut, ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. Etiam feugiat lorem non metus. Nunc interdum lacus sit amet orci. Donec id justo.</p>",
+                    "__originalUuid": null,
+                    "__type": "template:_examples/fields/blocks/text-image",
+                    "__uuid": "7a55ec44-128c-47d1-900c-cd17c4d59772",
+                    "__visible": true
+                },
+                "__originalUuid": null,
+                "__type": "template:_examples/fields/instance",
+                "__uuid": "c080bd8b-35a0-4163-9b87-e01869fd6cd3",
+                "__visible": true
             }
         },
         {
@@ -216,12 +216,12 @@
             "title": "Lightswitch field",
             "slug": "lightswitch-field",
             "pageContent": {
+                "simpleLightswitch": false,
+                "defaultValueLightswitch": true,
                 "__originalUuid": null,
                 "__type": "template:_examples/fields/lightswitch",
                 "__uuid": "e7c90dd1-daf6-4969-81fa-b9c32d41ceb2",
-                "__visible": true,
-                "simpleLightswitch": false,
-                "defaultValueLightswitch": true
+                "__visible": true
             }
         },
         {
@@ -233,10 +233,6 @@
             "title": "Link field",
             "slug": "link-field",
             "pageContent": {
-                "__originalUuid": null,
-                "__type": "template:_examples/fields/link",
-                "__uuid": "32e038f1-6ba2-430c-ae88-f4352335c0cb",
-                "__visible": true,
                 "simpleLink": {
                     "elementId": 0,
                     "openInNewWindow": true,
@@ -260,7 +256,11 @@
                     "openInNewWindow": false,
                     "type": "url",
                     "url": "https://craftcms.com/"
-                }
+                },
+                "__originalUuid": null,
+                "__type": "template:_examples/fields/link",
+                "__uuid": "32e038f1-6ba2-430c-ae88-f4352335c0cb",
+                "__visible": true
             }
         },
         {
@@ -272,10 +272,6 @@
             "title": "Location field",
             "slug": "location-field",
             "pageContent": {
-                "__originalUuid": null,
-                "__type": "template:_examples/fields/location",
-                "__uuid": "c2925acb-c48f-4c73-beae-f4a61ab57842",
-                "__visible": true,
                 "simpleLocation": {
                     "latitude": 59.324027708030215,
                     "longitude": 18.07122039794922
@@ -283,7 +279,11 @@
                 "defaultValueLocation": {
                     "latitude": 40.712776,
                     "longitude": -74.005974
-                }
+                },
+                "__originalUuid": null,
+                "__type": "template:_examples/fields/location",
+                "__uuid": "c2925acb-c48f-4c73-beae-f4a61ab57842",
+                "__visible": true
             }
         },
         {
@@ -295,16 +295,16 @@
             "title": "Number field",
             "slug": "number-field",
             "pageContent": {
-                "__originalUuid": null,
-                "__type": "template:_examples/fields/number",
-                "__uuid": "0b001154-2e66-4317-86b0-cbd7872291eb",
-                "__visible": true,
                 "numberField": 0.263746,
                 "integerField": 25,
                 "defaultValueField": 1000000,
                 "minMaxField": 10,
                 "optionalNumber": null,
-                "unitField": 0
+                "unitField": 0,
+                "__originalUuid": null,
+                "__type": "template:_examples/fields/number",
+                "__uuid": "0b001154-2e66-4317-86b0-cbd7872291eb",
+                "__visible": true
             }
         },
         {
@@ -316,11 +316,11 @@
             "title": "oEmbed field",
             "slug": "oembed-field",
             "pageContent": {
+                "simpleOEmbed": "https://www.youtube.com/watch?v=1Fg5iWmQjwk",
                 "__originalUuid": null,
                 "__type": "template:_examples/fields/oembed",
                 "__uuid": "a961e68f-7b65-4707-aa8b-6aa38c3cecd8",
-                "__visible": true,
-                "simpleOEmbed": "https://www.youtube.com/watch?v=1Fg5iWmQjwk"
+                "__visible": true
             }
         },
         {
@@ -332,15 +332,15 @@
             "title": "Redactor field",
             "slug": "redactor-field",
             "pageContent": {
-                "__originalUuid": null,
-                "__type": "template:_examples/fields/redactor",
-                "__uuid": "eec7f1f9-b4c6-4bfe-9906-475fa08f0a93",
-                "__visible": true,
                 "simpleRedactor": "<p>Phasellus dolor. Ut non enim eleifend felis pretium feugiat. Mauris turpis nunc, blandit et, volutpat molestie, porta ut, ligula.</p>\n<p>Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor. Vivamus aliquet elit ac nisl. Praesent venenatis metus at tortor pulvinar varius.</p>",
                 "configRedactor": "",
                 "purifierRedactor": "<p>Nulla neque dolor, sagittis eget, iaculis quis, molestie non, velit. Pellentesque ut neque. Morbi mollis tellus ac sapien.<br /></p>\n<!--pagebreak-->\n<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque egestas, neque sit amet convallis pulvinar, justo nulla eleifend augue, ac auctor orci leo non est. Fusce a quam.</p>\n<!--pagebreak-->\n<p>Phasellus volutpat, metus eget egestas mollis, lacus lacus blandit dui, id egestas quam mauris ut lacus. Cras dapibus. Nullam nulla eros, ultricies sit amet, nonummy id, imperdiet feugiat, pede.<br /></p>",
                 "nonSearchableRedactor": "",
-                "nonTranslatableRedactor": ""
+                "nonTranslatableRedactor": "",
+                "__originalUuid": null,
+                "__type": "template:_examples/fields/redactor",
+                "__uuid": "eec7f1f9-b4c6-4bfe-9906-475fa08f0a93",
+                "__visible": true
             }
         },
         {
@@ -352,10 +352,6 @@
             "title": "Reference field",
             "slug": "reference-field",
             "pageContent": {
-                "__originalUuid": null,
-                "__type": "template:_examples/fields/reference",
-                "__uuid": "8c92af20-87bf-44e0-a68c-8e737a194528",
-                "__visible": true,
                 "simpleReference": [
                     "115204c0-1f52-49a4-a638-cc6f7144b019",
                     "ff4adee0-bd11-4a65-bb31-32ae9f5c95ef"
@@ -371,7 +367,11 @@
                 ],
                 "criteriaReference": [
                     "4e4ec498-4ebd-451b-80f8-c18a19ec583d"
-                ]
+                ],
+                "__originalUuid": null,
+                "__type": "template:_examples/fields/reference",
+                "__uuid": "8c92af20-87bf-44e0-a68c-8e737a194528",
+                "__visible": true
             }
         },
         {
@@ -383,13 +383,13 @@
             "title": "Select field",
             "slug": "select-field",
             "pageContent": {
+                "selectField": "first",
+                "defaultValueSelect": "second",
+                "customDataSelect": "col-4-8",
                 "__originalUuid": null,
                 "__type": "template:_examples/fields/select",
                 "__uuid": "1b05b8d7-0f1c-4119-a7ee-1e87661b1e5d",
-                "__visible": true,
-                "selectField": "first",
-                "defaultValueSelect": "second",
-                "customDataSelect": "col-4-8"
+                "__visible": true
             }
         },
         {
@@ -401,13 +401,13 @@
             "title": "Swatch color field",
             "slug": "swatch-color-field",
             "pageContent": {
+                "simpleSwatchColor": "blue",
+                "defaultValueSwatchColor": "red",
+                "customDataSwatchColor": "green",
                 "__originalUuid": null,
                 "__type": "template:_examples/fields/swatch-color",
                 "__uuid": "9a9d5662-0f1f-4e8f-ae8d-599f032bfbeb",
-                "__visible": true,
-                "simpleSwatchColor": "blue",
-                "defaultValueSwatchColor": "red",
-                "customDataSwatchColor": "green"
+                "__visible": true
             }
         },
         {
@@ -419,16 +419,16 @@
             "title": "Text field",
             "slug": "text-field",
             "pageContent": {
-                "__originalUuid": null,
-                "__type": "template:_examples/fields/text",
-                "__uuid": "b5ef5579-6cc9-41b2-8341-39d4e967b052",
-                "__visible": true,
                 "textField": "Lorem ipsum dolor sit",
                 "placeholderField": null,
                 "emailField": "test@test.com",
                 "maxLengthField": "abcdefghij",
                 "patternField": "#00ff00",
-                "requiredField": "Pellentesque habitant"
+                "requiredField": "Pellentesque habitant",
+                "__originalUuid": null,
+                "__type": "template:_examples/fields/text",
+                "__uuid": "b5ef5579-6cc9-41b2-8341-39d4e967b052",
+                "__visible": true
             }
         },
         {
@@ -440,15 +440,15 @@
             "title": "Textarea field",
             "slug": "textarea-field",
             "pageContent": {
-                "__originalUuid": null,
-                "__type": "template:_examples/fields/textarea",
-                "__uuid": "5f6cff33-fdcf-4cb2-b7bc-96cc920eb7ad",
-                "__visible": true,
                 "textareaField": "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Maecenas ullamcorper.\n\nPraesent metus tellus, elementum eu, semper a, adipiscing nec, purus.",
                 "placeholderField": null,
                 "rowsField": null,
                 "colsField": null,
-                "codeField": "<p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Maecenas ullamcorper.</p>\n<p>Praesent metus tellus, elementum eu, semper a, adipiscing nec, purus.</p>"
+                "codeField": "<p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Maecenas ullamcorper.</p>\n<p>Praesent metus tellus, elementum eu, semper a, adipiscing nec, purus.</p>",
+                "__originalUuid": null,
+                "__type": "template:_examples/fields/textarea",
+                "__uuid": "5f6cff33-fdcf-4cb2-b7bc-96cc920eb7ad",
+                "__visible": true
             }
         },
         {
@@ -469,10 +469,6 @@
             "title": "Templates",
             "slug": "templates",
             "pageContent": {
-                "__originalUuid": null,
-                "__type": "template:_examples/schemas/templates",
-                "__uuid": "21615725-3cc8-4018-ab43-f27b74b617f1",
-                "__visible": true,
                 "image": [
                     "3030271d-1185-4870-9b46-e747905c540b"
                 ],
@@ -480,29 +476,33 @@
                 "body": "<p>Nam ipsum risus, rutrum vitae, vestibulum eu, molestie vel, lacus. Pellentesque libero tortor, tincidunt et, tincidunt eget, semper nec, quam. Ut leo. Pellentesque posuere.</p>\n<p>Morbi mattis ullamcorper velit. Nullam nulla eros, ultricies sit amet, nonummy id, imperdiet feugiat, pede. Praesent ut ligula non mi varius sagittis. Cras id dui.</p>",
                 "elements": [
                     {
+                        "body": "<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. Duis vel nibh at velit scelerisque suscipit. Phasellus nec sem in justo pellentesque facilisis. Donec orci lectus, aliquam ut, faucibus non, euismod id, nulla.</p>\n<p>In ut quam vitae odio lacinia tincidunt. Etiam sollicitudin, ipsum eu pulvinar rutrum, tellus ipsum laoreet sapien, quis venenatis ante odio sit amet eros. Sed cursus turpis vitae tortor. Aliquam lobortis.</p>",
                         "__originalUuid": null,
                         "__type": "template:_examples/fields/blocks/text",
                         "__uuid": "ff032b6d-2be0-44cf-b1a2-c7f007556558",
-                        "__visible": true,
-                        "body": "<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. Duis vel nibh at velit scelerisque suscipit. Phasellus nec sem in justo pellentesque facilisis. Donec orci lectus, aliquam ut, faucibus non, euismod id, nulla.</p>\n<p>In ut quam vitae odio lacinia tincidunt. Etiam sollicitudin, ipsum eu pulvinar rutrum, tellus ipsum laoreet sapien, quis venenatis ante odio sit amet eros. Sed cursus turpis vitae tortor. Aliquam lobortis.</p>"
+                        "__visible": true
                     },
                     {
+                        "image": [
+                            "3030271d-1185-4870-9b46-e747905c540b"
+                        ],
                         "__originalUuid": null,
                         "__type": "template:_examples/fields/blocks/image",
                         "__uuid": "5401837b-ac73-44af-91da-893d53dafdf3",
-                        "__visible": true,
-                        "image": [
-                            "3030271d-1185-4870-9b46-e747905c540b"
-                        ]
+                        "__visible": true
                     },
                     {
+                        "body": "<p>Curabitur a felis in nunc fringilla tristique. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin faucibus arcu quis ante.</p>",
                         "__originalUuid": null,
                         "__type": "template:_examples/fields/blocks/text",
                         "__uuid": "98b45ab3-b4c0-4ba0-9859-15b2d0b53ea1",
-                        "__visible": true,
-                        "body": "<p>Curabitur a felis in nunc fringilla tristique. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin faucibus arcu quis ante.</p>"
+                        "__visible": true
                     }
-                ]
+                ],
+                "__originalUuid": null,
+                "__type": "template:_examples/schemas/templates",
+                "__uuid": "21615725-3cc8-4018-ab43-f27b74b617f1",
+                "__visible": true
             }
         },
         {
@@ -514,35 +514,35 @@
             "title": "Structures (local)",
             "slug": "structure-schemas",
             "pageContent": {
-                "__originalUuid": null,
-                "__type": "template:_examples/schemas/structures-local",
-                "__uuid": "f306a5af-1b89-4d37-b68b-a22199ae0ac6",
-                "__visible": true,
                 "structureInstance": {
+                    "size": "h2",
+                    "title": "In enim justo",
                     "__originalUuid": null,
                     "__type": "structure:myLocalTitle@template:_examples/schemas/structures-local",
                     "__uuid": "906edf78-9f46-4557-ac80-3bc517ad80c7",
-                    "__visible": true,
-                    "size": "h2",
-                    "title": "In enim justo"
+                    "__visible": true
                 },
                 "structureArray": [
                     {
+                        "size": "h1",
+                        "title": "Pellentesque dapibus hendrerit",
                         "__originalUuid": null,
                         "__type": "structure:myLocalTitle@template:_examples/schemas/structures-local",
                         "__uuid": "f1fd00df-6b61-4ab8-9794-ac5665f80e88",
-                        "__visible": true,
-                        "size": "h1",
-                        "title": "Pellentesque dapibus hendrerit"
+                        "__visible": true
                     },
                     {
+                        "body": "<p>Donec vitae orci sed dolor rutrum auctor. Aliquam eu nunc. Etiam ut purus mattis mauris sodales aliquam. In turpis.</p>\n<p>Fusce fermentum odio nec arcu. Nam adipiscing. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus.</p>",
                         "__originalUuid": null,
                         "__type": "structure:myLocalText@template:_examples/schemas/structures-local",
                         "__uuid": "ab3f009d-67fb-4f34-a5ce-21bf6f10b222",
-                        "__visible": true,
-                        "body": "<p>Donec vitae orci sed dolor rutrum auctor. Aliquam eu nunc. Etiam ut purus mattis mauris sodales aliquam. In turpis.</p>\n<p>Fusce fermentum odio nec arcu. Nam adipiscing. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus.</p>"
+                        "__visible": true
                     }
-                ]
+                ],
+                "__originalUuid": null,
+                "__type": "template:_examples/schemas/structures-local",
+                "__uuid": "f306a5af-1b89-4d37-b68b-a22199ae0ac6",
+                "__visible": true
             }
         },
         {
@@ -554,35 +554,264 @@
             "title": "Structures (global)",
             "slug": "structures-global",
             "pageContent": {
-                "__originalUuid": null,
-                "__type": "template:_examples/schemas/structures-global",
-                "__uuid": "c08eb9f0-6afa-4797-8dbf-7be01726578e",
-                "__visible": true,
                 "structureInstance": {
+                    "size": "h2",
+                    "title": "Fusce vulputate eleifend",
                     "__originalUuid": null,
                     "__type": "structure:myGlobalTitle",
                     "__uuid": "fc66846b-9acc-4291-8e0b-753b0f3f852e",
-                    "__visible": true,
-                    "size": "h2",
-                    "title": "Fusce vulputate eleifend"
+                    "__visible": true
                 },
                 "structureArray": [
                     {
+                        "size": "h1",
+                        "title": "Cras ultricies mi",
                         "__originalUuid": null,
                         "__type": "structure:myGlobalTitle",
                         "__uuid": "2ab50cdf-24cf-4b32-9104-beb7137691b8",
-                        "__visible": true,
-                        "size": "h1",
-                        "title": "Cras ultricies mi"
+                        "__visible": true
                     },
                     {
+                        "body": "<p>Nullam cursus lacinia erat. Praesent nec nisl a purus blandit viverra. Phasellus dolor. Aenean massa. Donec posuere vulputate arcu.</p>\n<p>Quisque ut nisi. Praesent egestas tristique nibh. Nam pretium turpis et arcu. Nulla porta dolor. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum.</p>",
                         "__originalUuid": null,
                         "__type": "structure:myGlobalText",
                         "__uuid": "69f04be4-a4f6-4b39-a714-fd56c182705a",
-                        "__visible": true,
-                        "body": "<p>Nullam cursus lacinia erat. Praesent nec nisl a purus blandit viverra. Phasellus dolor. Aenean massa. Donec posuere vulputate arcu.</p>\n<p>Quisque ut nisi. Praesent egestas tristique nibh. Nam pretium turpis et arcu. Nulla porta dolor. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum.</p>"
+                        "__visible": true
                     }
-                ]
+                ],
+                "__originalUuid": null,
+                "__type": "template:_examples/schemas/structures-global",
+                "__uuid": "c08eb9f0-6afa-4797-8dbf-7be01726578e",
+                "__visible": true
+            }
+        },
+        {
+            "uid": "0e6b9612-e8d2-4280-bd02-bfe60c2fe497",
+            "siteUid": "38594be3-191b-4165-80db-d3ae47481175",
+            "sectionUid": "96163b4a-2030-40bf-975a-0d0b4c2bb67d",
+            "typeUid": "e5c5c76f-a034-482f-8bd3-56824ee34961",
+            "parentUid": null,
+            "title": "Tools",
+            "slug": "tools"
+        },
+        {
+            "uid": "58b5813b-243c-4d8c-9122-fefc9e2f71b4",
+            "siteUid": "38594be3-191b-4165-80db-d3ae47481175",
+            "sectionUid": "96163b4a-2030-40bf-975a-0d0b4c2bb67d",
+            "typeUid": "34c150c2-69e5-44e9-b382-f68de6e7befe",
+            "parentUid": "0e6b9612-e8d2-4280-bd02-bfe60c2fe497",
+            "title": "Chunk requests",
+            "slug": "chunk-requests",
+            "pageContent": {
+                "chunk": {
+                    "body": "<p>Pellentesque ut neque. Praesent turpis. Sed fringilla mauris sit amet nibh.</p>\n<p>Ut a nisl id ante tempus hendrerit. Mauris turpis nunc, blandit et, volutpat molestie, porta ut, ligula. Nullam quis ante.</p>",
+                    "__originalUuid": null,
+                    "__type": "template:_examples/tools/chunk-requests/chunk",
+                    "__uuid": "09110bd9-846d-4b05-ad27-324280989816",
+                    "__visible": true
+                },
+                "__originalUuid": null,
+                "__type": "template:_examples/tools/chunk-requests",
+                "__uuid": "af195096-4fb3-4847-a230-8e064a3b5f0c",
+                "__visible": true
+            }
+        },
+        {
+            "uid": "5d878db6-ab67-4726-913c-d0e316298c44",
+            "siteUid": "38594be3-191b-4165-80db-d3ae47481175",
+            "sectionUid": "96163b4a-2030-40bf-975a-0d0b4c2bb67d",
+            "typeUid": "34c150c2-69e5-44e9-b382-f68de6e7befe",
+            "parentUid": "0e6b9612-e8d2-4280-bd02-bfe60c2fe497",
+            "title": "Global fields",
+            "slug": "global-fields",
+            "pageContent": {
+                "swatchColor": "blue",
+                "alteredSwatchColor": "red",
+                "__originalUuid": null,
+                "__type": "template:_examples/tools/global-fields",
+                "__uuid": "8586e324-b78a-4c58-819f-a231199c2daa",
+                "__visible": true
+            }
+        },
+        {
+            "uid": "2da47129-a9ac-4289-8707-6694d07e8bf8",
+            "siteUid": "38594be3-191b-4165-80db-d3ae47481175",
+            "sectionUid": "96163b4a-2030-40bf-975a-0d0b4c2bb67d",
+            "typeUid": "34c150c2-69e5-44e9-b382-f68de6e7befe",
+            "parentUid": "0e6b9612-e8d2-4280-bd02-bfe60c2fe497",
+            "title": "Image Tags",
+            "slug": "image-tags",
+            "pageContent": {
+                "image": [
+                    "3030271d-1185-4870-9b46-e747905c540b"
+                ],
+                "__originalUuid": null,
+                "__type": "template:_examples/tools/image-tags",
+                "__uuid": "59107ea8-440c-4c12-9f74-987a21d48dc1",
+                "__visible": true
+            }
+        },
+        {
+            "uid": "e8c25cb9-2044-4230-a5d2-e4c8e690f3db",
+            "siteUid": "38594be3-191b-4165-80db-d3ae47481175",
+            "sectionUid": "96163b4a-2030-40bf-975a-0d0b4c2bb67d",
+            "typeUid": "34c150c2-69e5-44e9-b382-f68de6e7befe",
+            "parentUid": "0e6b9612-e8d2-4280-bd02-bfe60c2fe497",
+            "title": "Image tags: Default",
+            "slug": "image-tags-default",
+            "pageContent": {
+                "image": [
+                    "3030271d-1185-4870-9b46-e747905c540b"
+                ],
+                "__originalUuid": null,
+                "__type": "template:_examples/tools/image-tags-default",
+                "__uuid": "39b6b452-6018-4bfa-92d0-2ce7b8dde555",
+                "__visible": true
+            }
+        },
+        {
+            "uid": "1e8c6ac5-5a50-46b3-9fc3-1f69e440863c",
+            "siteUid": "38594be3-191b-4165-80db-d3ae47481175",
+            "sectionUid": "96163b4a-2030-40bf-975a-0d0b4c2bb67d",
+            "typeUid": "34c150c2-69e5-44e9-b382-f68de6e7befe",
+            "parentUid": "0e6b9612-e8d2-4280-bd02-bfe60c2fe497",
+            "title": "Image tags: Wrapped",
+            "slug": "image-tags-wrapped",
+            "pageContent": {
+                "image": [
+                    "3030271d-1185-4870-9b46-e747905c540b"
+                ],
+                "__originalUuid": null,
+                "__type": "template:_examples/tools/image-tags-wrapped",
+                "__uuid": "6741086d-8311-4c89-ba4e-ccf81543c170",
+                "__visible": true
+            }
+        },
+        {
+            "uid": "af4df636-47c8-4dfb-ae4d-2f0796d88084",
+            "siteUid": "38594be3-191b-4165-80db-d3ae47481175",
+            "sectionUid": "96163b4a-2030-40bf-975a-0d0b4c2bb67d",
+            "typeUid": "34c150c2-69e5-44e9-b382-f68de6e7befe",
+            "parentUid": "0e6b9612-e8d2-4280-bd02-bfe60c2fe497",
+            "title": "Image tags: Picture",
+            "slug": "image-tags-picture",
+            "pageContent": {
+                "image": [
+                    "3030271d-1185-4870-9b46-e747905c540b"
+                ],
+                "__originalUuid": null,
+                "__type": "template:_examples/tools/image-tags-picture",
+                "__uuid": "3aa4273f-cce0-476d-bc54-d25c20db3f1b",
+                "__visible": true
+            }
+        },
+        {
+            "uid": "27b18e5a-abf7-4dc9-9003-91fd8b63c509",
+            "siteUid": "38594be3-191b-4165-80db-d3ae47481175",
+            "sectionUid": "96163b4a-2030-40bf-975a-0d0b4c2bb67d",
+            "typeUid": "34c150c2-69e5-44e9-b382-f68de6e7befe",
+            "parentUid": "0e6b9612-e8d2-4280-bd02-bfe60c2fe497",
+            "title": "Image tags: Global",
+            "slug": "image-tags-global",
+            "pageContent": {
+                "image": [
+                    "3030271d-1185-4870-9b46-e747905c540b"
+                ],
+                "__originalUuid": null,
+                "__type": "template:_examples/tools/image-tags-global",
+                "__uuid": "eb010d25-58ca-4f03-8a5d-b6b376ec040d",
+                "__visible": true
+            }
+        },
+        {
+            "uid": "7290275a-83a1-4238-8a62-b6985a6d2961",
+            "siteUid": "38594be3-191b-4165-80db-d3ae47481175",
+            "sectionUid": "96163b4a-2030-40bf-975a-0d0b4c2bb67d",
+            "typeUid": "34c150c2-69e5-44e9-b382-f68de6e7befe",
+            "parentUid": "0e6b9612-e8d2-4280-bd02-bfe60c2fe497",
+            "title": "Live preview",
+            "slug": "live-preview",
+            "pageContent": {
+                "elements": [
+                    {
+                        "body": "<p>Praesent blandit laoreet nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos.<br /></p>\n",
+                        "__originalUuid": null,
+                        "__type": "template:_examples/fields/blocks/text",
+                        "__uuid": "f73cd91c-df62-4c32-9190-9da62337c4da",
+                        "__visible": true
+                    },
+                    {
+                        "image": [
+                            "3030271d-1185-4870-9b46-e747905c540b"
+                        ],
+                        "__originalUuid": null,
+                        "__type": "template:_examples/fields/blocks/image",
+                        "__uuid": "ed465626-7c16-4094-921f-58a7d7d4e4d1",
+                        "__visible": true
+                    },
+                    {
+                        "body": "<p>Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Aenean ut eros et nisl sagittis vestibulum. Donec vitae sapien ut libero venenatis faucibus.</p>",
+                        "__originalUuid": null,
+                        "__type": "template:_examples/fields/blocks/text",
+                        "__uuid": "0527a26d-ab75-4568-901c-403846df5e19",
+                        "__visible": true
+                    }
+                ],
+                "__originalUuid": null,
+                "__type": "template:_examples/tools/live-preview",
+                "__uuid": "d0497368-4bf2-455b-a70d-9ffc89e2c769",
+                "__visible": true
+            }
+        },
+        {
+            "uid": "492d7f71-d629-452e-a768-02fc63b7fd2f",
+            "siteUid": "38594be3-191b-4165-80db-d3ae47481175",
+            "sectionUid": "96163b4a-2030-40bf-975a-0d0b4c2bb67d",
+            "typeUid": "34c150c2-69e5-44e9-b382-f68de6e7befe",
+            "parentUid": "0e6b9612-e8d2-4280-bd02-bfe60c2fe497",
+            "title": "Models",
+            "slug": "models",
+            "pageContent": {
+                "__originalUuid": null,
+                "__type": "template:_examples/tools/models",
+                "__uuid": "9dd2456d-53f9-4a21-9215-3afbe1b53362",
+                "__visible": true
+            }
+        },
+        {
+            "uid": "ff7312de-3b29-45f4-9f49-d7fd1b360c2c",
+            "siteUid": "38594be3-191b-4165-80db-d3ae47481175",
+            "sectionUid": "96163b4a-2030-40bf-975a-0d0b4c2bb67d",
+            "typeUid": "34c150c2-69e5-44e9-b382-f68de6e7befe",
+            "parentUid": "0e6b9612-e8d2-4280-bd02-bfe60c2fe497",
+            "title": "Models: Forms",
+            "slug": "model-forms",
+            "pageContent": {
+                "__originalUuid": null,
+                "__type": "template:_examples/tools/models-form",
+                "__uuid": "09ab15fe-20f3-4127-99aa-5578f0c0fe14",
+                "__visible": true
+            }
+        },
+        {
+            "uid": "83e176bf-cfba-453a-b46a-f8059239fe94",
+            "siteUid": "38594be3-191b-4165-80db-d3ae47481175",
+            "sectionUid": "96163b4a-2030-40bf-975a-0d0b4c2bb67d",
+            "typeUid": "34c150c2-69e5-44e9-b382-f68de6e7befe",
+            "parentUid": "0e6b9612-e8d2-4280-bd02-bfe60c2fe497",
+            "title": "Models: Ajax requests",
+            "slug": "models-ajax-requests",
+            "pageContent": {
+                "search": {
+                    "__originalUuid": null,
+                    "__type": "template:_examples/tools/models-ajax/search",
+                    "__uuid": "3d8c7e56-cff9-4d45-a717-d0705c703712",
+                    "__visible": true
+                },
+                "__originalUuid": null,
+                "__type": "template:_examples/tools/models-ajax",
+                "__uuid": "595a0107-e538-4004-9169-696591495fec",
+                "__visible": true
             }
         }
     ]

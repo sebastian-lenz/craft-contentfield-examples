@@ -1,0 +1,58 @@
+label: "Tools: Image tags"
+rootSchema: true
+fields:
+  image: image
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Images</h1>
+  <p>The plugin includes a helper to render image tags, on reference fields the
+    method <code>imageTag</code> can be used to render an image tag of the
+    first reference. The method accepts an option object which controls how
+    the image will be rendered.</p>
+  {% example %}
+    {{ image.imageTag({
+      attributes: {
+        class: 'figure-img img-fluid rounded'
+      }
+    }) }}
+  {% endexample %}
+
+  <p>Alternatively the plugin exposes the Twig function <code>imageTag</code> that
+    can be called with any asset reference. It takes two arguments, the first one
+    is the asset and the second one is the configuration object.</p>
+  {% example %}
+    {% set asset = image.first %}
+    {{ imageTag(asset, {
+      attributes: {
+        class: 'figure-img img-fluid rounded'
+      }
+    }) }}
+  {% endexample %}
+
+  <h2>Image tag types</h2>
+  <p>This helper supports rendering of different image tag types.</p>
+
+  <h3>Default</h3>
+  <p>The default image tag renderer creates a plain <code>img</code> tag. It supports
+    the <code>srcset</code> attribute.</p>
+  <p><a href="image-tags-default" class="btn btn-primary">Image tags: Default</a></p>
+
+  <h3>Wrapped</h3>
+  <p>The wrapped image tag renderer creates an <code>img</code> tag that is wrapped
+    by an additional html element like a <code>div</code> tag. Can additionally
+    render a placeholder and <code>noscript</code> tag.</p>
+  <p><a href="image-tags-wrapped" class="btn btn-primary">Image tags: Wrapped</a></p>
+
+  <h3>Picture</h3>
+  <p>The picture image tag renderer creates a <code>picture</code> tag. Supports
+    multiple <code>source</code> tags and can render a <code>noscript</code>
+    fallback image.</p>
+  <p><a href="image-tags-picture" class="btn btn-primary">Image tags: Picture</a></p>
+
+  <h2>Global definitions</h2>
+  <p>In order to be able to reuse the image configurations, the plugin allows them to be
+    defined globally in <code>config/content/imagetags.yml</code>.</p>
+  <p><a href="image-tags-global" class="btn btn-primary">Image tags: Global</a></p>
+{% endblock %}

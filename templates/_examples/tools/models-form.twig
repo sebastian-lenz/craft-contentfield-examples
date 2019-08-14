@@ -1,0 +1,31 @@
+label: "Tools: Models - Forms"
+rootSchema: true
+model: examples\models\ContactForm
+---
+{% extends '_layouts/default' %}
+{% from '_includes/forms' import textField, textareaField %}
+
+{% block content %}
+  <h1>Models: Forms</h1>
+  <p>One common usage of instance models is to create html forms. The plugin ships
+    with a helper class <code>lenz\contentfield\models\forms\AbstractForm</code>
+    that helps with implementing a basic form.</p>
+  <p>This example uses the model class defined in <code>examples\models\ContactForm</code>
+    and the input macros defined in <code>_includes/forms.twig</code> to render a
+    working html form with server side validation and csrf protection.</p>
+  {% example %}
+    {% if model.isSubmitted %}
+      <div class="alert alert-success" role="alert">Form submitted</div>
+    {% else %}
+      <form action="{{ entry.url }}" method="post" class="mb-3">
+        {{ csrfInput() }}
+        {% namespace 'contactForm' %}
+          {{ textField(model, 'name') }}
+          {{ textField(model, 'mail') }}
+          {{ textareaField(model, 'message') }}
+          <button type="submit" class="btn btn-primary">Submit</button>
+        {% endnamespace %}
+      </form>
+    {% endif %}
+  {% endexample %}
+{% endblock %}

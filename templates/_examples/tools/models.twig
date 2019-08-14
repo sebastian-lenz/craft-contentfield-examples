@@ -1,0 +1,27 @@
+label: "Tools: Models"
+rootSchema: true
+
+# Defines the model class that should be created for each instance
+# of this schema. The created class instance will be accessible
+# using the `model` template variable.
+model: examples\models\SimpleModel
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Models</h1>
+  <p>The plugin allows you to attach PHP model classes to schema instances.
+    Each schema instance carries its own, discrete model instance. The instanced
+    model of the current schema instance can be accessed using the variable
+    <code>model</code>.</p>
+  <p>In this example <code>model</code> is set to <code>examples\models\SimpleModel</code>.
+    We can access all of its public properties:</p>
+  {% example %}
+    <pre>{{ model.myConstProperty }}</pre>
+  {% endexample %}
+
+  <p>We can also invoke public functions:</p>
+  {% example %}
+    <pre>{{ model.fetch().url }}</pre>
+  {% endexample %}
+{% endblock %}

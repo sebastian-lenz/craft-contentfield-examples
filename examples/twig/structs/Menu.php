@@ -1,6 +1,6 @@
 <?php
 
-namespace examples\models;
+namespace examples\twig\structs;
 
 use Craft;
 use craft\base\ElementInterface;

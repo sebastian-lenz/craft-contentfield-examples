@@ -1,4 +1,4 @@
-dateModified: 1565363047
+dateModified: 1565791427
 email:
   fromEmail: admin@example.com
   fromName: 'Content Field Examples'
@@ -20,6 +20,7 @@ fields:
       rootSchemas:
         - 'template:_examples/fields/*'
         - 'template:_examples/schemas/*'
+        - 'template:_examples/tools/*'
       useAsPageTemplate: '1'
     contentColumnType: string
     fieldGroup: d6e41384-38c0-4a4b-871d-c7f0fc4eff53

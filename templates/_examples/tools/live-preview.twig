@@ -1,0 +1,20 @@
+label: "Tools: Live preview"
+rootSchema: true
+fields:
+  elements:
+    type: instances
+    schemas: _examples/fields/blocks/*
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Live preview</h1>
+  <p>Instances support a special ive preview hud allowing editors to edit
+    elements on a page using the live preview of Craft CMS. In order to enable
+    the hud, elements must render the attributes defined by
+    <code>{{ '{{ editAttributes }}' }}</code> on a wrapping element.</p>
+
+  {% example %}
+    {% display elements %}
+  {% endexample %}
+{% endblock %}

@@ -1,0 +1,20 @@
+label: "Tools: Models - Ajax requests"
+rootSchema: true
+fields:
+  search:
+    type: instance
+    schemas: _examples/tools/models-ajax/*
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Models: Ajax requests</h1>
+  <p>Instance models work well in combination with <a href="chunk-requests">chunk
+    requests</a> allowing us to create interactive content easily.</p>
+  <p>The following example shows a search form that fetches the results
+    using ajax requests. It uses the model defined in
+    <code>examples\models\SearchModel</code>.</p>
+  {% example %}
+    {% display search %}
+  {% endexample %}
+{% endblock %}

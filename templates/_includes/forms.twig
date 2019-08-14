@@ -1,0 +1,36 @@
+{% macro field(model, fieldName, input) %}
+  <div class="form-group">
+    <label for="name">{{ model.attributeLabel(fieldName) }}*</label>
+    {{ input }}
+
+    {% if model.hasErrors(fieldName) %}
+      <div class="invalid-feedback">{{ model.errors(fieldName)|join('<br>') }}</div>
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro textField(model, fieldName) %}
+  {% set input %}
+    <input{{ attr({
+      class: 'form-control' ~ (model.hasErrors(fieldName) ? ' is-invalid' : ''),
+      id: fieldName,
+      name: fieldName,
+      type: 'text',
+      value: model[fieldName],
+    }) }}/>
+  {% endset %}
+
+  {{ _self.field(model, fieldName, input) }}
+{% endmacro %}
+
+{% macro textareaField(model, fieldName) %}
+  {% set input %}
+    <textarea{{ attr({
+      class: 'form-control' ~ (model.hasErrors(fieldName) ? ' is-invalid' : ''),
+      id: fieldName,
+      name: fieldName,
+    }) }}>{{ model[fieldName] }}</textarea>
+  {% endset %}
+
+  {{ _self.field(model, fieldName, input) }}
+{% endmacro %}

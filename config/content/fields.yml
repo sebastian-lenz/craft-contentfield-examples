@@ -1,0 +1,30 @@
+# This is a globally defined field type. You can reuse this field
+# in any schema by using its name as the `type`:
+#
+# ```
+# fields:
+#   color:
+#     type: mySwatchColor
+# ```
+#
+# Or use the shorthand syntax for fields that are only defined by type:
+#
+# ```
+# fields:
+#   color: mySwatchColor
+# ```
+mySwatchColor:
+  type: swatchColor
+  options:
+    red: "#D63545"
+    green: "#28a745"
+    blue: "#007bff"
+
+# Fields can extend each other, specify the name of the field you would like
+# to extend in the `type` attribute.
+# Note that you currently can only overwrite existing attributes or add new
+# new attributes.
+myExtendedSwatchColor:
+  type: mySwatchColor
+  label: Custom color label
+  instructions: Please select a swatch color.

@@ -1,0 +1,56 @@
+label: "Search"
+rootSchema: true
+model: examples\models\SearchModel
+---
+{% set results %}
+  <table class="table">
+    {% for result in model.results %}
+      <tr>
+        <td><a href="{{ result.url }}">{{ result.title }}</a></td>
+        <td>{{ result.postDate|date() }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endset %}
+
+{% if isChunkRequest %}
+  {{ results }}
+{% else %}
+  <form action="{{ instance.content.owner.url }}" id="ajaxSearchForm" method="get">
+    <div class="input-group mb-3">
+      <input{{ attr({
+        autocomplete: 'off',
+        class: 'form-control',
+        id: 'ajaxSearchInput',
+        name: 'query',
+        placeholder: 'Search term',
+        type: 'search',
+        value: model.query,
+      }) }}/>
+    </div>
+  </form>
+  <div id="ajaxSearchResults">
+    {{ results }}
+  </div>
+
+  <script>
+    (function() {
+      var $form = $('#ajaxSearchForm');
+      var endpoint = "{{ instance.chunkUrl }}";
+
+      function fetchResults(event) {
+        event.preventDefault();
+
+        $.ajax({
+          url: endpoint,
+          data: $form.serialize(),
+        }).then(function(response) {
+          $('#ajaxSearchResults').html(response);
+        });
+      }
+
+      $form.on('submit', fetchResults);
+      $('#ajaxSearchInput').on('input', fetchResults);
+    })();
+  </script>
+{% endif %}

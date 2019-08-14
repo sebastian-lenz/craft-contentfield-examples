@@ -2,7 +2,7 @@
 
 namespace examples\twig;
 
-use examples\models\Menu;
+use examples\twig\structs\Menu;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 

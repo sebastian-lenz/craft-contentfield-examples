@@ -1,0 +1,20 @@
+label: "Chunk"
+fields:
+  body: redactor
+---
+{% spaceless %}
+  <div class="bg-light border pt-3 px-3 mb-3">
+    {{ body }}
+
+    <table class="table">
+      <tr>
+        <td>Render time</td>
+        <td>{{ "now"|date("r") }}</td>
+      </tr>
+      <tr>
+        <td>Is chunk request</td>
+        <td>{{ isChunkRequest ? 'Yes' : 'No' }}</td>
+      </tr>
+    </table>
+  </div>
+{% endspaceless %}

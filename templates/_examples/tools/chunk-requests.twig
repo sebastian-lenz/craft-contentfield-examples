@@ -1,0 +1,87 @@
+label: "Tools: Chunk requests"
+rootSchema: true
+fields:
+  chunk:
+    type: instance
+    schemas: _examples/tools/chunk-requests/*
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Chunk requests</h1>
+  <p>All instances within a Content Field have a globally unique id. You
+    may access it using the <code>getUuid</code> method or the short code
+    <code>uuid</code> in Twig.</p>
+  {% example %}
+    <pre>{{ chunk.uuid }}</pre>
+  {% endexample %}
+
+  <p>You can use this uuids every time you need to uniquely identify something
+    in your template, e.g. using the <code>id</code> attribute.</p>
+  <p>Furthermore, the Content Field can partially render only specific instances.
+    To do this, each instance has its own url which can be retrieved using the
+    <code>getChunkUrl</code> method or <code>chunkUrl</code> in Twig.</p>
+  {% example %}
+    <pre>Url: {{ chunk.chunkUrl }}</pre>
+  {% endexample %}
+
+  <p>When visiting a chunk url with a browser, Craft will only render the html
+    chunk defined by the specified instance uuid.</p>
+  {% example %}
+    <p>
+      <a{{ attr({
+        class: "btn btn-primary",
+        href: chunk.chunkUrl,
+        target: "_blank"
+      }) }}>Show chunk</a>
+    </p>
+  {% endexample %}
+
+  <p>This behavior is primarily intended to be used with XMLHttpRequests, it allows
+    you to partially update the currently viewed page.</p>
+  <p>Note that you can use the variable <code>isChunkRequest</code> in templates
+    to detect whether the current request is a chunk request.</p>
+  {% example %}
+    <div class="mb-3" data-url="{{ chunk.chunkUrl }}">
+      <div data-behavior="chunkContainer">
+        {% display chunk %}
+      </div>
+      <button data-behavior="chunkReload">Reload</button>
+    </div>
+
+    <script>
+      $('[data-behavior=chunkReload]').click(function(e) {
+        var $parent = $(e.target).parent();
+        $.ajax({
+          url: $parent.data('url'),
+        }).then(function(response) {
+          $('[data-behavior=chunkContainer]', $parent).html(response);
+        });
+      });
+    </script>
+  {% endexample %}
+
+  <p>Chunk requests can also return json data, request the chunk url with the
+    header <code>Accept</code> set to <code>application/json</code> to retrieve
+    a json document.</p>
+  {% example %}
+    <div class="mb-3" data-url="{{ chunk.chunkUrl }}">
+      <pre data-behavior="chunkContainer"></pre>
+      <button data-behavior="chunkJson">Load JSON</button>
+    </div>
+
+    <script>
+      $('[data-behavior=chunkJson]').click(function(e) {
+        var $parent = $(e.target).parent();
+        $.ajax({
+          dataType: 'json',
+          url: $parent.data('url'),
+        }).then(function(response) {
+          $('[data-behavior=chunkContainer]', $parent).text(
+            JSON.stringify(response, null, 2)
+          );
+        });
+      });
+    </script>
+  {% endexample %}
+{% endblock %}
