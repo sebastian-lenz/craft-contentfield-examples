@@ -1,0 +1,245 @@
+label: "Tools: Image tags - Configuration"
+rootSchema: true
+fields:
+  image: image
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Image tags: Configuration</h1>
+  <p>The configuration image tag renders a html tag based upon a configuration
+    structure. Under the hood, it collects your configuration data and passes
+    it to the <code>craft\helpers\Html::tag</code> function.</p>
+  <p>This type is intended to be used in <a href="image-tags-global">globally defined</a>
+    image tags. It is especially useful as a base type for image type configurations
+    that extend each other.</p>
+
+  <h2>Basics</h2>
+  <p>A tag is defined by three options: <code>tagName</code>, <code>attributes</code>
+    and <code>children</code>.</p>
+  {% example %}
+    {{ image.imageTag({
+      type: 'config',
+      tagName: 'div',
+      attributes: {
+        class: 'alert alert-success',
+      },
+      children: 'Hello world!'
+    }) }}
+  {% endexample %}
+
+  <p>All attributes support variables, use the syntax <code>{varname}</code>
+    to insert variables. The following example renders a simple image tag
+    using the variables <code>{height}</code>, <code>{src}</code> and
+    <code>{width}</code>.</p>
+  {% example %}
+    {{ image.imageTag({
+      'type': 'config',
+      'tagName': 'img',
+      'attributes': {
+        'class': 'figure-img img-fluid rounded',
+        'height': '{height}',
+        'src': '{src}',
+        'width': '{width}',
+      }
+    }) }}
+  {% endexample %}
+
+  <h2>Transforms</h2>
+  <p>Like the <a href="image-tags-image">image</a> tag, the configuration image tag
+    supports the <code>transforms</code> option to specify image transforms.</p>
+  {% example %}
+    {{ image.imageTag({
+      'type': 'config',
+      'tagName': 'img',
+      'attributes': {
+        'class': 'figure-img img-fluid rounded',
+        'height': '{height}',
+        'srcset': '{srcset}',
+        'width': '{width}',
+      },
+      'transforms': [
+        { 'mode': 'crop', 'height': 240, 'width': 320 },
+        { 'mode': 'crop', 'height': 480, 'width': 640 },
+      ],
+    }) }}
+  {% endexample %}
+
+  <h2>Transform groups</h2>
+  <p>Like the <a href="image-tags-picture">picture</a> tag, the configuration image tag
+    supports the <code>transformGroups</code> option to specify multiple groups of
+    image transforms. Use the option <code>repeat</code> to repeat a tag for each transform
+    group.</p>
+  {% example %}
+    {{ image.imageTag({
+      'type': 'config',
+      'tagName': 'picture',
+      'children': [
+        {
+          'tagName': 'source',
+          'repeat': 'transformGroups',
+          'attributes': {
+            'srcset': '{srcset}',
+          },
+        }, {
+          'tagName': 'img',
+          'attributes': {
+            'class': 'figure-img img-fluid rounded',
+            'height': '{height}',
+            'srcset': '{srcset}',
+            'width': '{width}',
+          },
+        }
+      ],
+      'transformGroups': {
+        'mobile': {
+          'media': '(max-width:767px)',
+          'transforms': [
+            { 'mode': 'crop', 'height': 240, 'width': 320 },
+            { 'mode': 'crop', 'height': 480, 'width': 640 },
+          ]
+        },
+        'desktop': {
+          'transform': { 'mode': 'crop', 'height': 768, 'width': 1024 },
+        }
+      }
+    }) }}
+  {% endexample %}
+
+  <h2>Scopes</h2>
+  <p>The <code>transforms</code> and <code>transformGroups</code> options are scoped
+    to the tag they are defined in. Tags that don't have transforms defined
+    will fetch parent transforms.</p>
+  <p>The following example uses scopes to render a low resolution placeholder. Note
+    that the <code>img</code> tag still uses the high resolution transforms defined
+    on the parent tag.</p>
+  {% example %}
+    <style>
+      .lazy-load { position:relative; height:0;  }
+      .lazy-load > * { position:absolute; top:0; left:0; width:100%; height:100%; }
+      .lazy-load-placeholder { background-size:cover; }
+    </style>
+
+    {{ image.imageTag({
+      'type': 'config',
+      'tagName': 'div',
+      'attributes': {
+        'class': 'lazy-load',
+        'style': '{cssAspect}'
+      },
+      'children': [
+        {
+          'tagName': 'div',
+          'attributes': {
+            'class': 'lazy-load-placeholder',
+            'style': '{cssBackground}',
+          },
+          'transform': { 'mode': 'crop', 'height': 12, 'width': 16, 'format': 'png' },
+        }, {
+          'tagName': 'img',
+          'attributes': {
+            'class': 'lazy-load-img',
+            'height': '{height}',
+            'data-srcset': '{srcset}',
+            'width': '{width}',
+          },
+        }
+      ],
+      'transforms': [
+        { 'mode': 'crop', 'height': 240, 'width': 320 },
+        { 'mode': 'crop', 'height': 480, 'width': 640 },
+      ],
+    }) }}
+  {% endexample %}
+
+  <h3>Shortcuts</h3>
+  <p>The option <code>children</code> can contain additional tag definitions. The
+    resulting configuration structure can become difficult to read quickly.</p>
+  {% example %}
+    {{ image.imageTag({
+      'type': 'config',
+      'tagName': 'dl',
+      'attributes': {
+        'class': 'row',
+      },
+      'children': [
+        {
+          'tagName': 'dt',
+          'attributes': {
+          'class': 'col-sm-3',
+        },
+          'children': 'Definition term'
+        }, {
+          'tagName': 'dd',
+          'attributes': {
+            'class': 'col-sm-9',
+          },
+          'children': 'Definition description'
+        }
+      ]
+    }) }}
+  {% endexample %}
+
+  <p>Instead of putting tag attributes into the option <code>attributes</code>
+    they can also defined by options on the tag itself starting with a
+    <code>.</code> (dot). As Twig does not support hash keys starting with
+    a dot, the keys must be quoted.</p>
+  {% example %}
+    {{ image.imageTag({
+      'type': 'config',
+      'tagName': 'dl',
+      '.class': 'row',
+      'children': [
+        {
+          'tagName': 'dt',
+          '.class': 'col-sm-3',
+          'children': 'Definition term'
+        }, {
+          'tagName': 'dd',
+          '.class': 'col-sm-9',
+          'children': 'Definition description'
+        }
+      ]
+    }) }}
+  {% endexample %}
+
+  <p>Instead of putting child tags into the option <code>children</code> they can also defined
+    by options on the tag itself starting with a <code>+</code> (plus). As Twig does not support
+    hash keys starting with a plus sign, the keys must be quoted.</p>
+  {% example %}
+    {{ image.imageTag({
+      'type': 'config',
+      'tagName': 'dl',
+      '.class': 'row',
+      '+dt': {
+        'tagName': 'dt',
+        '.class': 'col-sm-3',
+        'children': 'Definition term'
+      },
+      '+dd': {
+        'tagName': 'dd',
+        '.class': 'col-sm-9',
+        'children': 'Definition description'
+      }
+    }) }}
+  {% endexample %}
+
+  <p>If children are defined on the tag itself starting with a <code>+</code> and
+    the tag name matches the name of the key, the option <code>tagName</code> of
+    the child tag can be omitted.</p>
+  {% example %}
+    {{ image.imageTag({
+      'type': 'config',
+      'tagName': 'dl',
+      '.class': 'row',
+      '+dt': {
+        '.class': 'col-sm-3',
+        'children': 'Definition term'
+      },
+      '+dd': {
+        '.class': 'col-sm-9',
+        'children': 'Definition description'
+      }
+    }) }}
+  {% endexample %}
+{% endblock %}

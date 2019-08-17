@@ -652,38 +652,20 @@
             }
         },
         {
-            "uid": "e8c25cb9-2044-4230-a5d2-e4c8e690f3db",
-            "siteUid": "38594be3-191b-4165-80db-d3ae47481175",
-            "sectionUid": "96163b4a-2030-40bf-975a-0d0b4c2bb67d",
-            "typeUid": "34c150c2-69e5-44e9-b382-f68de6e7befe",
-            "parentUid": "0e6b9612-e8d2-4280-bd02-bfe60c2fe497",
-            "title": "Image tags: Default",
-            "slug": "image-tags-default",
-            "pageContent": {
-                "image": [
-                    "3030271d-1185-4870-9b46-e747905c540b"
-                ],
-                "__originalUuid": null,
-                "__type": "template:_examples/tools/image-tags-default",
-                "__uuid": "39b6b452-6018-4bfa-92d0-2ce7b8dde555",
-                "__visible": true
-            }
-        },
-        {
             "uid": "1e8c6ac5-5a50-46b3-9fc3-1f69e440863c",
             "siteUid": "38594be3-191b-4165-80db-d3ae47481175",
             "sectionUid": "96163b4a-2030-40bf-975a-0d0b4c2bb67d",
             "typeUid": "34c150c2-69e5-44e9-b382-f68de6e7befe",
             "parentUid": "0e6b9612-e8d2-4280-bd02-bfe60c2fe497",
-            "title": "Image tags: Wrapped",
-            "slug": "image-tags-wrapped",
+            "title": "Image tags: Image",
+            "slug": "image-tags-image",
             "pageContent": {
                 "image": [
                     "3030271d-1185-4870-9b46-e747905c540b"
                 ],
                 "__originalUuid": null,
-                "__type": "template:_examples/tools/image-tags-wrapped",
-                "__uuid": "6741086d-8311-4c89-ba4e-ccf81543c170",
+                "__type": "template:_examples/tools/image-tags-image",
+                "__uuid": "8a74837b-7d6d-41e4-8ed7-ff9137029c52",
                 "__visible": true
             }
         },
@@ -702,6 +684,42 @@
                 "__originalUuid": null,
                 "__type": "template:_examples/tools/image-tags-picture",
                 "__uuid": "3aa4273f-cce0-476d-bc54-d25c20db3f1b",
+                "__visible": true
+            }
+        },
+        {
+            "uid": "e8c25cb9-2044-4230-a5d2-e4c8e690f3db",
+            "siteUid": "38594be3-191b-4165-80db-d3ae47481175",
+            "sectionUid": "96163b4a-2030-40bf-975a-0d0b4c2bb67d",
+            "typeUid": "34c150c2-69e5-44e9-b382-f68de6e7befe",
+            "parentUid": "0e6b9612-e8d2-4280-bd02-bfe60c2fe497",
+            "title": "Image tags: Template",
+            "slug": "image-tags-default",
+            "pageContent": {
+                "image": [
+                    "3030271d-1185-4870-9b46-e747905c540b"
+                ],
+                "__originalUuid": null,
+                "__type": "template:_examples/tools/image-tags-template",
+                "__uuid": "e0e14fc2-537d-4cd1-a73e-fd8f336dad8c",
+                "__visible": true
+            }
+        },
+        {
+            "uid": "081121af-f000-4a15-9c05-f78937aea7cb",
+            "siteUid": "38594be3-191b-4165-80db-d3ae47481175",
+            "sectionUid": "96163b4a-2030-40bf-975a-0d0b4c2bb67d",
+            "typeUid": "34c150c2-69e5-44e9-b382-f68de6e7befe",
+            "parentUid": "0e6b9612-e8d2-4280-bd02-bfe60c2fe497",
+            "title": "Image tags: Configuration",
+            "slug": "image-tags-configuration",
+            "pageContent": {
+                "image": [
+                    "3030271d-1185-4870-9b46-e747905c540b"
+                ],
+                "__originalUuid": null,
+                "__type": "template:_examples/tools/image-tags-config",
+                "__uuid": "7fbfccfa-75fb-437c-97d7-b39ac0b680b9",
                 "__visible": true
             }
         },
@@ -754,6 +772,16 @@
                         "__originalUuid": null,
                         "__type": "template:_examples/fields/blocks/text",
                         "__uuid": "0527a26d-ab75-4568-901c-403846df5e19",
+                        "__visible": true
+                    },
+                    {
+                        "image": [
+                            "3030271d-1185-4870-9b46-e747905c540b"
+                        ],
+                        "body": "<p>Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor. Maecenas egestas arcu quis ligula mattis placerat. Praesent venenatis metus at tortor pulvinar varius.</p>\n<p>Nam pretium turpis et arcu. Phasellus blandit leo ut odio. Maecenas malesuada.</p>",
+                        "__originalUuid": null,
+                        "__type": "template:_examples/fields/blocks/text-image",
+                        "__uuid": "7c64bc49-a6f2-47d8-86ed-df06c479cf4c",
                         "__visible": true
                     }
                 ],

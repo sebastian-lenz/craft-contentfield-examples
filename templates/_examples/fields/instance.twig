@@ -100,29 +100,6 @@ fields:
   {% endexample %}
 
 
-  <h3>getType / type</h3>
-  <p>You can check which type an instance is of by using the
-    <code>getType</code> method. The method will return a complete
-    schema qualifier which always has the form
-    <code>schemaType:schemaName</code>.</p>
-  {% example %}
-    <pre>{{ wildcardInstance.type }}</pre>
-  {% endexample %}
-
-  <p>You can use the <code>type</code> attribute in conjunction with
-    Crafts <code>switch</code> block:</p>
-  {% example %}
-    {% switch wildcardInstance.type %}
-    {% case 'template:_examples/fields/blocks/image' %}
-      <div class="alert alert-info" role="alert">I am an image block</div>
-    {% case 'template:_examples/fields/blocks/text' %}
-      <div class="alert alert-info" role="alert">I am a text block</div>
-    {% case 'template:_examples/fields/blocks/text-image' %}
-      <div class="alert alert-info" role="alert">I am a text/image block</div>
-    {% endswitch %}
-  {% endexample %}
-
-
   <h3>getUuid / uuid</h3>
   <p>All instances have a unique id, you can access it using the
     <code>getUuid</code> method.</p>
@@ -143,11 +120,42 @@ fields:
   {% endexample %}
 
 
-  <h3>isOfType</h3>
-  <p>The <code>isOfType</code> method performs a schema match similar to the
+  <h3>getSchema / schema</h3>
+  <p>You can receive information about the schema an instance is using with
+    the <code>getSchema</code> method.
+
+  <h4>qualifier</h4>
+    <p>The attribute <code>qualifier</code> on a schema contains the complete
+    schema qualifier which always has the form <code>schemaType:schemaName</code>.</p>
+  {% example %}
+    <pre>{{ wildcardInstance.schema.qualifier }}</pre>
+  {% endexample %}
+
+  <h4>getName() / name</h4>
+  <p>The method <code>getName</code> returns the name part of the qualifier.</p>
+  {% example %}
+    <pre>{{ wildcardInstance.schema.name }}</pre>
+  {% endexample %}
+
+  <p>You can use the <code>name</code> attribute in conjunction with
+    Crafts <code>switch</code> block:</p>
+  {% example %}
+    {% switch wildcardInstance.schema.name %}
+      {% case '_examples/fields/blocks/image' %}
+        <div class="alert alert-info" role="alert">I am an image block</div>
+      {% case '_examples/fields/blocks/text' %}
+        <div class="alert alert-info" role="alert">I am a text block</div>
+      {% case '_examples/fields/blocks/text-image' %}
+        <div class="alert alert-info" role="alert">I am a text/image block</div>
+    {% endswitch %}
+  {% endexample %}
+
+
+  <h4>matchesQualifier()</h4>
+  <p>The <code>matchesQualifier</code> method performs a schema match similar to the
     way schemas are collected by the <code>schema</code> attribute.</p>
   {% example %}
-    {% if wildcardInstance.isOfType('_examples/fields/blocks/text') %}
+    {% if wildcardInstance.schema.matchesQualifier('_examples/fields/blocks/text') %}
       <div class="alert alert-success" role="alert">I am a text block</div>
     {% else %}
       <div class="alert alert-danger" role="alert">I am not a text block</div>
@@ -156,7 +164,7 @@ fields:
 
   <p>You can check for multiple types by passing an array.</p>
   {% example %}
-    {% if wildcardInstance.isOfType([
+    {% if wildcardInstance.schema.matchesQualifier([
       '_examples/fields/blocks/image',
       '_examples/fields/blocks/text-image'
     ]) %}
@@ -168,7 +176,7 @@ fields:
 
   <p>You can check the type against a wildcard.</p>
   {% example %}
-    {% if wildcardInstance.isOfType('_examples/fields/blocks/text*') %}
+    {% if wildcardInstance.schema.matchesQualifier('_examples/fields/blocks/text*') %}
       <div class="alert alert-success" role="alert">I contain text</div>
     {% else %}
       <div class="alert alert-danger" role="alert">I do not contain text</div>

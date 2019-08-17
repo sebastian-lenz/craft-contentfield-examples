@@ -1,0 +1,73 @@
+label: "Tools: Image tags - Image"
+rootSchema: true
+fields:
+  image: image
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Image tags: Image</h1>
+  <p>The image tag renderer is the most basic renderer and outputs a plain
+    <code>img</code> tag. The <code>class</code> option can be passed to
+    set the class on the image tag.</p>
+  <p>Note: The option <code>type: 'image'</code> in the following examples
+    is optional, <code>image</code> is the default image tag type and
+    the <code>type</code> option can be omitted.</p>
+  {% example %}
+    {{ image.imageTag({
+      type: 'image',
+      class: 'figure-img img-fluid rounded',
+    }) }}
+  {% endexample %}
+
+  <p>Use the <code>alt</code> option to set the alternative image text.
+    All options support variables, use the syntax <code>{varname}</code>
+    to insert variables in option values.</p>
+  {% example %}
+    {{ image.imageTag({
+      type: 'image',
+      alt: 'Image size: {width}x{height}',
+      class: 'figure-img img-fluid rounded',
+    }) }}
+  {% endexample %}
+
+  <p>The image can be transformed by passing either a transform handle or a
+    transform configuration object to the <code>transform</code> option.</p>
+  {% example %}
+    {{ image.imageTag({
+      type: 'image',
+      class: 'figure-img img-fluid rounded',
+      transform: { mode: 'crop', height: 240, width: 320 },
+    }) }}
+  {% endexample %}
+
+  <p>When specifying multiple transforms using the <code>transforms</code>
+    option, a source set attribute is generated.</p>
+  {% example %}
+    {{ image.imageTag({
+      type: 'image',
+      class: 'figure-img img-fluid rounded',
+      sizes: '(max-width:767px) 320w,640w',
+      transforms: [
+        { mode: 'crop', height: 240, width: 320 },
+        { mode: 'crop', height: 480, width: 640 },
+      ],
+    }) }}
+  {% endexample %}
+
+  <p>Source sets by default use a width descriptor (e.g.
+    <code>file-1.jpg <u>320w</u>,file-2.jpg <u>640w</u></code>). Alternative
+    descriptors can be specified by passing an object to the
+    <code>transforms</code> option, the keys of the object are used as
+    the descriptor for each transform.</p>
+  {% example %}
+    {{ image.imageTag({
+      type: 'image',
+      class: 'figure-img img-fluid rounded',
+      transforms: {
+        '1x': { mode: 'crop', height: 240, width: 320 },
+        '2x': { mode: 'crop', height: 480, width: 640 },
+      },
+    }) }}
+  {% endexample %}
+{% endblock %}

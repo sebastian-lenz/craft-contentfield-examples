@@ -1,0 +1,21 @@
+label: "Tools: Image tags - Template"
+rootSchema: true
+fields:
+  image: image
+---
+{% extends '_layouts/default' %}
+
+{% block content %}
+  <h1>Image tags: Template</h1>
+  <p>The template image tag renderer uses a Twig template to render the image tag.
+    This type is intended to be used in <a href="image-tags-global">globally defined</a>
+    image tags.</p>
+  {% example %}
+    {{ image.imageTag({
+      type: 'template',
+      template: '
+        <img class="figure-img img-fluid rounded" src="{{ src }}" width="{{ width }}" height="{{ height }}" />
+      '
+    }) }}
+  {% endexample %}
+{% endblock %}

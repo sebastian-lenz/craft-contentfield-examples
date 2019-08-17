@@ -21,6 +21,18 @@ fields:
       Passed info: <strong>{{ info }}</strong>
     </div>
   {% endif %}
-
-  {{ body }}
+  <div class="row">
+    <div class="col-md-6">
+      {% if image.hasValue %}
+        <figure class="figure">
+          {{ image.imageTag({
+            class: 'figure-img img-fluid rounded'
+          }) }}
+        </figure>
+      {% endif %}
+    </div>
+    <div class="col-md-6">
+      {{ body }}
+    </div>
+  </div>
 </div>

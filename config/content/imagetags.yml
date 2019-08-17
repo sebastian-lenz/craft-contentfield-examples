@@ -2,28 +2,23 @@
 # by passing its name to the image tag helper:
 #
 # ```
-# {{ imageTag(asset, 'myImageTag') }}
+# {{ imageTag(asset, 'egImage') }}
 # ```
-myImageTag:
-  type: default
-  attributes:
-    class: figure-img rounded
-    sizes: '(max-width: 991px) 416px, 696px'
-  transforms:
-    - { mode: 'crop', width: 416, height: 293 }
-    - { mode: 'crop', width: 696, height: 489 }
+egImage:
+  type: config
+  .class: wrapper
+  .style: position:relative; {cssAspect}
+  +img:
+    .class: figure-img rounded img-fluid
+    .srcset: $srcset
+    .style: position:absolute; top:0; left:0; width:100%; height:100%
 
 # Image tag definitions can extend each other, specify the name of the
 # configuration that should be extended in the `type` attribute.
-#
-# Attributes will be overwritten recursively. The `class` attribute
-# is treated specially and will be merged. So in the following example
-# the image tag will render with all merged classes:
-#
-# ```
-# <img class="figure-img rounded img-fluid" ... />
-# ```
-myFluidImageTag:
-  type: myImageTag
-  attributes:
-    class: img-fluid
+egFluidImage:
+  type: egImage
+  +img:
+    .sizes: '(max-width: 991px) 416px, 696px'
+  transforms:
+    - { mode: 'crop', width: 416, height: 293 }
+    - { mode: 'crop', width: 696, height: 489 }
